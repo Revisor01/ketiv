@@ -49,5 +49,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "overrides": {
+    "shell-quote": "^1.8.4",
+    "websocket-driver": "^0.7.5",
+    "underscore": "^1.13.8"
   }
 }
