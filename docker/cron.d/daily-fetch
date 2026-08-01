@@ -1,0 +1,2 @@
+# Täglicher Übersetzungs-Cache um 00:02 (Env aus /etc/container.env, siehe start.sh)
+2 0 * * * root . /etc/container.env && /usr/local/bin/php /var/www/html/scripts/daily_fetch.php >> /proc/1/fd/1 2>&1

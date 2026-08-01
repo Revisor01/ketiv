@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # Backend API
+  losungen-api:
+    build: .
+    container_name: losungen-api
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+    ports:
+      - "8374:80"  # API Backend Port
+    environment:
+      - BIBLESERVER_API_KEY=${BIBLESERVER_API_KEY:-}
+      - API_KEY_1=${API_KEY_1}
+      - API_KEY_2=${API_KEY_2}
+      - API_KEY_3=${API_KEY_3}
+      - TZ=Europe/Berlin
+      - DB_HOST=postgres
+      - DB_NAME=losungen_db
+      - DB_USER=losungen_user
+      - DB_PASSWORD=${DB_PASSWORD}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - losungen-network
+
+  # Frontend
+  biblescraper-frontend:
+    build: ./frontend
+    container_name: biblescraper-frontend
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+    ports:
+      - "3030:80"  # Frontend Port
+    environment:
+      - TZ=Europe/Berlin
+    networks:
+      - losungen-network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: losungen-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=losungen_db
+      - POSTGRES_USER=losungen_user
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - TZ=Europe/Berlin
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    # ports:
+    #   - "5433:5432"  # Nicht nötig - nur interne Container-Kommunikation
+    networks:
+      - losungen-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: losungen-redis
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Berlin
+    volumes:
+      - redis_data:/data
+    networks:
+      - losungen-network
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  losungen-network:
+    driver: bridge
