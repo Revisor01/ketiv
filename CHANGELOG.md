@@ -80,8 +80,8 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Unterstützung komplexer Versbereiche inklusive ausgeschlossener Verse
   (z. B. `Joh 8,8-12.14-17`).
 
+Die Einträge vor 2.1.0 sind aus der ursprünglichen Git-History rekonstruiert.
+Da diese beim Zusammenfassen entfernt wurde, gibt es für sie keine Tags.
+
 [Unreleased]: https://github.com/Revisor01/losungen-api/compare/v2.1.0...HEAD
 [2.1.0]: https://github.com/Revisor01/losungen-api/releases/tag/v2.1.0
-[2.0.0]: https://github.com/Revisor01/losungen-api/releases/tag/v2.0.0
-[1.1.0]: https://github.com/Revisor01/losungen-api/releases/tag/v1.1.0
-[1.0.0]: https://github.com/Revisor01/losungen-api/releases/tag/v1.0.0
