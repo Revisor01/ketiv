@@ -1,6 +1,7 @@
-# Losungen API
+# Ketiv — Losungen API
 
-API für tägliche Losungen und Bibeltexte mit Web-Interface.
+Bibeltexte in vielen Übersetzungen im Vergleich, Kirchenjahr mit Perikopen und die
+Tageslosung. API mit React-Frontend; das Frontend tritt als **Ketiv** auf.
 
 ## Features
 
@@ -10,6 +11,50 @@ API für tägliche Losungen und Bibeltexte mit Web-Interface.
 - Web-Interface mit React
 - Docker-basiertes Deployment
 - PostgreSQL Datenbank für Caching
+
+## Name
+
+Die App heißt **Ketiv** — „was geschrieben steht". In der masoretischen Tradition
+bezeichnet *Ketiv* den geschriebenen Konsonantentext, *Qere* die abweichende
+Lesart am Rand. Zwei Fassungen desselben Verses nebeneinander: genau das, was
+diese App tut, wenn sie Übersetzungen vergleicht und Klammern, Auslassungen und
+optionale Verse korrekt auflöst.
+
+Geplante Domain: ketiv.de
+
+## Rechtliches
+
+**Losungen.** Urheberrechtlich geschützt (Evangelische Brüder-Unität – Herrnhuter
+Brüdergemeine). Die Veröffentlichung im Internet ist ausdrücklich gestattet, aber
+an Auflagen geknüpft — siehe `docs/NUTZUNGSBEDINGUNGEN-Losungen-2023.pdf`.
+Vor einer öffentlichen Freigabe zu erfüllen:
+
+- [x] Anzeige immer aus **beiden** Versen (Losung AT + Lehrtext NT)
+- [x] kostenlos, keine In-App-Käufe, nicht kommerziell
+- [ ] Losungstexte im Interface klar als »Die Losungen« bezeichnen
+- [ ] Losungsdaten ausschließlich von losungen.de beziehen
+- [ ] nur laufendes Jahr sowie Vor- und Folgejahr bereitstellen
+      (aktuell liegen 2024–2027 in `sql/`)
+- [ ] sichtbarer Hinweis „© Evangelische Brüder-Unität – Herrnhuter Brüdergemeine"
+      mit Link auf herrnhuter.de sowie „Weitere Informationen finden Sie hier."
+      mit Link auf losungen.de
+- [ ] Link zur Veröffentlichung an support@losungen.de senden
+
+**Bibeltexte.** Die Suche bezieht ihre Texte per Scraping von bibleserver.com.
+ERF bietet dafür bewusst keine API an („aus Lizenzgründen nicht möglich") und
+erteilt selbst keine Genehmigungen. Die verwendeten modernen Übersetzungen
+(Luther 2017, EÜ, HFA, NGÜ, GNB, BasisBibel, Zürcher, NeÜ) sind urheberrechtlich
+geschützt. **Dieser Teil ist für den privaten Gebrauch gedacht.**
+
+Für eine Veröffentlichung müsste auf lizenzfreie Quellen umgestellt werden:
+
+- gemeinfrei und frei verbreitbar: Luther 1545/1912, Elberfelder 1871/1905,
+  Textbibel 1906, Menge 1939 (CC0)
+- nicht-kommerziell verbreitbar: Schlachter 1951
+- Bezugsquellen: getbible.net (Lizenz je Übersetzung dokumentiert),
+  CrossWire/SWORD, Zefania XML — alle als JSON/XML zum Selbsthosten
+- moderne Übersetzungen nur über Lizenz (Deutsche Bibelgesellschaft, schriftliche
+  Anfrage) oder scripture.api.bible (Starter-Plan: strikt nicht-kommerziell)
 
 ## Setup
 

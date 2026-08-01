@@ -1,6 +1,6 @@
 {
-  "short_name": "BibleScraper Pro",
-  "name": "BibleScraper Pro - Professionelle Bibeltext-Suche",
+  "short_name": "Ketiv",
+  "name": "Ketiv — was geschrieben steht",
   "icons": [
     {
       "src": "favicon.ico",
@@ -12,5 +12,5 @@
   "display": "standalone",
   "theme_color": "#6366f1",
   "background_color": "#f8faff",
-  "description": "Professionelle Bibeltext-Suche mit über 30 Übersetzungen inkl. ERF Bibleserver und BIGS"
+  "description": "Bibeltexte in vielen Übersetzungen im Vergleich, Kirchenjahr mit Perikopen und die Tageslosung"
 }

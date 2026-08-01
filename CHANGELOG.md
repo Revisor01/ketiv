@@ -7,6 +7,17 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+### Changed
+- Das Frontend heißt jetzt **Ketiv** („was geschrieben steht") statt
+  „BibleScraper Pro" — Titel, Header, Login und PWA-Metadaten angepasst.
+  Geplante Domain: ketiv.de.
+
+### Added
+- Nutzungsbedingungen der Herrnhuter Brüdergemeine als
+  `docs/NUTZUNGSBEDINGUNGEN-Losungen-2023.pdf` im Repository.
+- README: Abschnitt „Rechtliches" mit den Auflagen für eine Veröffentlichung
+  der Losungen und der Rechtslage zu den Bibelübersetzungen.
+
 ## [2.1.0] - 2026-07-31
 
 ### Security

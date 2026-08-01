@@ -137,7 +137,7 @@ export const AdminPanel: React.FC = () => {
                 System Administration
               </h1>
               <p className="text-gray-600">
-                Überwache und steuere die BibleScraper Pro API
+                Überwache und steuere die Losungen-API
               </p>
             </div>
             <div className="text-right">
