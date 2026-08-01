@@ -7,6 +7,8 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+## [2.2.0] - 2026-08-01
+
 ### Changed
 - Das Projekt heißt jetzt durchgängig **Ketiv** („was geschrieben steht") statt
   „BibleScraper Pro": Titel, Header, Login, PWA-Metadaten, GitHub-Repository
@@ -107,5 +109,6 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 Die Einträge vor 2.1.0 sind aus der ursprünglichen Git-History rekonstruiert.
 Da diese beim Zusammenfassen entfernt wurde, gibt es für sie keine Tags.
 
-[Unreleased]: https://github.com/Revisor01/ketiv/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/Revisor01/ketiv/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/Revisor01/ketiv/releases/tag/v2.2.0
 [2.1.0]: https://github.com/Revisor01/ketiv/releases/tag/v2.1.0
