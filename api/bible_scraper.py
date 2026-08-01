@@ -1,6 +1,6 @@
 #!/opt/venv/bin/python3
 """
-Erweiterte Bible Scraper für BibleScraper Pro
+Erweiterte Bible-Scraper für Ketiv
 Unterstützt Einzelverse, Versbereiche und verschiedene Quellen
 """
 

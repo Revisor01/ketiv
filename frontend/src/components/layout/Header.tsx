@@ -31,7 +31,8 @@ export const Header: React.FC<HeaderProps> = ({
               className="flex items-center space-x-3"
             >
               <div className="w-8 h-8 bg-gradient-royal rounded-xl flex items-center justify-center">
-                <span className="text-white font-heading font-bold text-lg">K</span>
+                {/* Kaf — Anfangsbuchstabe von כְּתִיב (ketiv) */}
+                <span className="text-white font-semibold text-xl leading-none translate-y-[1px]">כ</span>
               </div>
               <h1 className="font-heading text-xl font-bold gradient-text">
                 Ketiv

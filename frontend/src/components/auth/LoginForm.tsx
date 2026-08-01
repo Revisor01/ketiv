@@ -25,7 +25,16 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, error }) => {
         className="max-w-md w-full space-y-8"
       >
         <div>
-          <h2 className="mt-6 text-center text-3xl font-heading font-bold text-gray-900">
+          <div className="flex justify-center">
+            <div
+              className="w-16 h-16 bg-gradient-royal rounded-2xl flex items-center justify-center shadow-royal"
+              aria-hidden="true"
+            >
+              {/* Kaf — Anfangsbuchstabe von כְּתִיב (ketiv) */}
+              <span className="text-white font-semibold text-4xl leading-none translate-y-[2px]">כ</span>
+            </div>
+          </div>
+          <h2 className="mt-5 text-center text-3xl font-heading font-bold text-gray-900">
             Ketiv
           </h2>
           <p className="mt-1 text-center text-sm text-gray-500 italic">

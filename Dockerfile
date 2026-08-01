@@ -68,7 +68,7 @@ RUN echo 'log_errors = On' >> /usr/local/etc/php/conf.d/docker-php-errors.ini \
     && echo 'date.timezone = Europe/Berlin' >> /usr/local/etc/php/conf.d/docker-php-errors.ini
 
 # Fix Apache ServerName warning
-RUN echo 'ServerName losungen-api' >> /etc/apache2/apache2.conf
+RUN echo 'ServerName ketiv-api' >> /etc/apache2/apache2.conf
 
 # Reduce Apache log noise (suppress startup notices etc.)
 RUN sed -i 's/^LogLevel .*/LogLevel warn/' /etc/apache2/apache2.conf

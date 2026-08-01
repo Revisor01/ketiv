@@ -20,7 +20,8 @@ Lesart am Rand. Zwei Fassungen desselben Verses nebeneinander: genau das, was
 diese App tut, wenn sie Übersetzungen vergleicht und Klammern, Auslassungen und
 optionale Verse korrekt auflöst.
 
-Geplante Domain: ketiv.de
+Live unter **ketiv.de**. `losung.konfi-quest.de` läuft als Spiegel weiter,
+bis Konfi-Quest auf die neue URL umgestellt ist.
 
 ## Rechtliches
 
@@ -60,8 +61,8 @@ Für eine Veröffentlichung müsste auf lizenzfreie Quellen umgestellt werden:
 
 ```bash
 # Repository klonen
-git clone https://github.com/Revisor01/losungen-api.git
-cd losungen-api
+git clone https://github.com/Revisor01/ketiv.git
+cd ketiv
 
 # Environment-Variablen anpassen
 cp .env.example .env
@@ -94,13 +95,13 @@ GET /bible_search.php?api_key=YOUR_KEY&reference=Johannes 3,16&translation=LUT
 
 Das Deployment läuft automatisch über GitHub Actions: Ein Push auf `main` baut die
 Images, schiebt sie nach GHCR und stößt per Webhook den Portainer-Stack
-`biblescrapper` auf server.godsapp.de an. Live unter losung.konfi-quest.de.
+`ketiv` auf server.godsapp.de an. Live unter ketiv.de.
 
 Zwei Workflows:
 
-- **Build Frontend** (`frontend/**`) → `losungen-api-frontend`, die React-App
+- **Build Frontend** (`frontend/**`) → `ketiv-frontend`, die React-App
 - **Build API** (`api/**`, `frontend/**`, `scripts/**`, `Dockerfile`, `docker/**`, `db/**`)
-  → `losungen-api-api`. Dieser Workflow baut zusätzlich das Frontend und legt es als
+  → `ketiv-api`. Dieser Workflow baut zusätzlich das Frontend und legt es als
   `public/` ins Image — das ist die Landingpage auf der API-Wurzel. `public/` ist
   deshalb ein Build-Artefakt und liegt bewusst nicht im Repository.
 
@@ -127,7 +128,7 @@ docker-compose up -d --build
    ```yaml
    version: '3.8'
    services:
-     losungen-api:
+     ketiv-api:
        build: .
        restart: unless-stopped
        ports:
@@ -142,9 +143,9 @@ docker-compose up -d --build
          - ./logs:/var/log/apache2
        labels:
          - "traefik.enable=true"
-         - "traefik.http.routers.losungen.rule=Host(\`your-domain.com\`)"
-         - "traefik.http.routers.losungen.tls=true"
-         - "traefik.http.routers.losungen.tls.certresolver=letsencrypt"
+         - "traefik.http.routers.ketiv.rule=Host(\`your-domain.com\`)"
+         - "traefik.http.routers.ketiv.tls=true"
+         - "traefik.http.routers.ketiv.tls.certresolver=letsencrypt"
    ```
 
 3. **Reverse Proxy konfigurieren** (Apache/Nginx)
@@ -392,9 +393,9 @@ Die API läuft in einem optimierten PHP-Apache Container mit Python für Web-Scr
 ```yaml
 version: '3.8'
 services:
-  losungen-api:
+  ketiv-api:
     build: .
-    container_name: losungen-api
+    container_name: ketiv-api
     restart: unless-stopped
     ports:
       - "8374:80"  # Port anpassbar
@@ -411,9 +412,9 @@ services:
     # Traefik Labels für automatisches SSL
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.losungen.rule=Host(\`losung.example.com\`)"
-      - "traefik.http.routers.losungen.tls=true"
-      - "traefik.http.routers.losungen.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.ketiv.rule=Host(\`losung.example.com\`)"
+      - "traefik.http.routers.ketiv.tls=true"
+      - "traefik.http.routers.ketiv.tls.certresolver=letsencrypt"
 
 networks:
   losungen-network:
@@ -439,7 +440,7 @@ docker-compose down
 docker-compose ps
 
 # In Container einloggen (Debugging)
-docker-compose exec losungen-api bash
+docker-compose exec ketiv-api bash
 ```
 
 ## 🔧 Entwicklung
@@ -448,8 +449,8 @@ docker-compose exec losungen-api bash
 
 1. **Repository forken und klonen**
    ```bash
-   git clone https://github.com/yourusername/losungen-api.git
-   cd losungen-api
+   git clone https://github.com/Revisor01/ketiv.git
+   cd ketiv
    ```
 
 2. **Development Environment starten**
@@ -471,7 +472,7 @@ docker-compose exec losungen-api bash
 ### Projekt-Struktur
 
 ```
-losungen-api/
+ketiv/
 ├── api/
 │   ├── index.php           # Haupt-API Endpoint
 │   └── scraper.py          # Python Web-Scraper
@@ -574,7 +575,7 @@ ab -n 100 -c 10 -H "X-API-Key: your-key" "http://localhost:8374/"
 # docker-compose.prod.yml
 version: '3.8'
 services:
-  losungen-api:
+  ketiv-api:
     build: .
     restart: unless-stopped
     read_only: true                    # Container read-only
@@ -632,7 +633,7 @@ grep "401" logs/access.log | wc -l
 
 ```bash
 # Container-Ressourcen überwachen
-docker stats losungen-api
+docker stats ketiv-api
 
 # Response-Times messen
 curl -H "X-API-Key: your-key" -w "%{time_total}\n" -o /dev/null -s "http://localhost:8374/"
@@ -707,6 +708,6 @@ Dieses Projekt steht unter der MIT Lizenz - siehe [LICENSE](LICENSE) für Detail
 
 **Made with ❤️ for the Christian Community**
 
-[⭐ Star this repo](https://github.com/yourusername/losungen-api) | [🐛 Report Bug](https://github.com/yourusername/losungen-api/issues) | [💡 Request Feature](https://github.com/yourusername/losungen-api/issues)
+[⭐ Star this repo](https://github.com/Revisor01/ketiv) | [🐛 Report Bug](https://github.com/Revisor01/ketiv/issues) | [💡 Request Feature](https://github.com/Revisor01/ketiv/issues)
 
 </div>

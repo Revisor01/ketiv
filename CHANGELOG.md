@@ -8,9 +8,22 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Changed
-- Das Frontend heißt jetzt **Ketiv** („was geschrieben steht") statt
-  „BibleScraper Pro" — Titel, Header, Login und PWA-Metadaten angepasst.
-  Geplante Domain: ketiv.de.
+- Das Projekt heißt jetzt durchgängig **Ketiv** („was geschrieben steht") statt
+  „BibleScraper Pro": Titel, Header, Login, PWA-Metadaten, GitHub-Repository
+  (`Revisor01/ketiv`), Container-Images (`ghcr.io/revisor01/ketiv-api`,
+  `ketiv-frontend`), Container- und Netzwerknamen sowie der Portainer-Stack.
+- Logo zeigt **כ** (Kaf), den Anfangsbuchstaben von כְּתִיב, statt eines Buchstabens
+  aus dem alten Namen — auf der Login-Seite und im Header.
+- Live unter **ketiv.de** (Let's Encrypt, DNS mit SPF/DKIM/DMARC/CAA).
+  `losung.konfi-quest.de` läuft als Spiegel weiter, bis Konfi-Quest umgestellt ist.
+- `docker-compose.portainer.yml` entspricht wieder dem tatsächlichen
+  Produktionsstand (Bind-Mounts statt benannter Volumes, Traefik-Labels).
+
+### Fixed
+- API-Aufrufe auf der Wurzel (`/?api_key=…`) landeten nach der Traefik-Umstellung
+  beim Frontend und lieferten HTML statt JSON. Eigener Router mit
+  `QueryRegexp(api_key, .+)` und höherer Priorität — `Query(api_key)` allein
+  matcht nur leere Werte.
 
 ### Added
 - Nutzungsbedingungen der Herrnhuter Brüdergemeine als
@@ -94,5 +107,5 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 Die Einträge vor 2.1.0 sind aus der ursprünglichen Git-History rekonstruiert.
 Da diese beim Zusammenfassen entfernt wurde, gibt es für sie keine Tags.
 
-[Unreleased]: https://github.com/Revisor01/losungen-api/compare/v2.1.0...HEAD
-[2.1.0]: https://github.com/Revisor01/losungen-api/releases/tag/v2.1.0
+[Unreleased]: https://github.com/Revisor01/ketiv/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/Revisor01/ketiv/releases/tag/v2.1.0
