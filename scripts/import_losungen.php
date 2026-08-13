@@ -10,7 +10,12 @@
  *   php import_losungen.php 2027 /pfad/datei.zip    # lokale ZIP oder XML
  */
 
-require_once __DIR__ . '/../api/database.php';
+// Im Container liegt database.php unter /var/www/html, lokal unter api/
+if (file_exists('/var/www/html/database.php')) {
+    require_once '/var/www/html/database.php';
+} else {
+    require_once __DIR__ . '/../api/database.php';
+}
 
 class LosungenImporter {
     private $db;
@@ -60,6 +65,21 @@ class LosungenImporter {
             return file_get_contents($path);
         }
 
+        $xmlContent = class_exists('ZipArchive')
+            ? $this->extractWithZipArchive($path)
+            : $this->extractWithUnzip($path);
+
+        if (!$xmlContent) {
+            throw new Exception("Keine XML-Datei im ZIP gefunden");
+        }
+
+        return $xmlContent;
+    }
+
+    /**
+     * ZIP-Extraktion über die PHP-Erweiterung
+     */
+    private function extractWithZipArchive($path) {
         $zip = new ZipArchive();
         if ($zip->open($path) !== true) {
             throw new Exception("ZIP konnte nicht geöffnet werden: {$path}");
@@ -76,11 +96,26 @@ class LosungenImporter {
         }
         $zip->close();
 
-        if (!$xmlContent) {
-            throw new Exception("Keine XML-Datei im ZIP gefunden");
+        return $xmlContent;
+    }
+
+    /**
+     * ZIP-Extraktion über das unzip-Binary (ext-zip ist im Image nicht vorhanden)
+     */
+    private function extractWithUnzip($path) {
+        $list = shell_exec('unzip -Z1 ' . escapeshellarg($path) . ' 2>/dev/null');
+        if (!$list) {
+            throw new Exception("ZIP konnte nicht gelesen werden: {$path}");
         }
 
-        return $xmlContent;
+        foreach (explode("\n", trim($list)) as $name) {
+            if (strtolower(pathinfo($name, PATHINFO_EXTENSION)) === 'xml') {
+                echo "📄 Enthaltene XML: {$name}\n";
+                return shell_exec('unzip -p ' . escapeshellarg($path) . ' ' . escapeshellarg($name) . ' 2>/dev/null');
+            }
+        }
+
+        return null;
     }
 
     /**
