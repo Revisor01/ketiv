@@ -7,6 +7,8 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+## [2.2.1] - 2026-08-14
+
 ### Behoben
 - Die täglichen Übersetzungen werden wieder geladen. Sie waren ausgefallen, weil
   die Tagesstelle vorab von losungen.de geholt wurde und diese Seite kein
@@ -25,6 +27,7 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ### Sonstiges
 - Der Jahresimport läuft auch dort, wo das Entpacken von Archiven nicht direkt
   zur Verfügung steht.
+- Letzte Reste des alten Projektnamens in den Frontend-Metadaten entfernt.
 
 ## [2.2.0] - 2026-08-01
 
