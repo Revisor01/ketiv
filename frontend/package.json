@@ -1,6 +1,6 @@
 {
   "name": "ketiv",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.7.0",
@@ -15,12 +15,12 @@
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.0.0",
-    "postcss": "^8.4.0",
+    "postcss": "^8.5.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.0",
     "react-query": "^3.39.0",
-    "react-router-dom": "^6.14.0",
+    "react-router-dom": "^7.18.2",
     "react-scripts": "5.0.1",
     "tailwindcss": "^3.3.0",
     "typescript": "^4.9.0",
@@ -51,8 +51,15 @@
     ]
   },
   "overrides": {
+    "@tootallnate/once": "^2.0.1",
+    "nanoid": "^3.3.18",
+    "nth-check": "^2.1.1",
+    "serialize-javascript": "^7.0.5",
     "shell-quote": "^1.8.4",
-    "websocket-driver": "^0.7.5",
-    "underscore": "^1.13.8"
+    "svgo": "^2.8.3",
+    "underscore": "^1.13.8",
+    "uuid": "^11.1.1",
+    "webpack-dev-server": "^5.2.6",
+    "websocket-driver": "^0.7.5"
   }
 }
