@@ -7,6 +7,19 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+## [2.2.2] - 2026-08-14
+
+### Sonstiges
+- Bekannte Sicherheitslücken in den Bibliotheken des Frontends geschlossen:
+  von 21 gemeldeten Punkten sind 18 behoben. Die Navigation der Anwendung wurde
+  dafür auf eine neue Hauptversion gehoben; Bedienung und Seiten bleiben
+  unverändert.
+- Die drei verbliebenen Meldungen betreffen ein Werkzeug, das nur beim Erstellen
+  von SASS-Dateien anspringt. Das Projekt verwendet kein SASS, der betroffene
+  Teil läuft nie mit. Eine Behebung wäre nur durch einen Rückschritt auf eine
+  drei Jahre alte Bauumgebung möglich und würde mehr Risiko schaffen als
+  beseitigen.
+
 ## [2.2.1] - 2026-08-14
 
 ### Behoben
