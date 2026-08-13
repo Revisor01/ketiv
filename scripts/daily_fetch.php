@@ -57,16 +57,34 @@ class DailyFetcher {
         if ($this->db->hasDataForDate($date)) {
             echo "⚠️  Daten für {$date} bereits vorhanden. Überschreibe...\n";
         }
-        
+
+        // Basis-Losung aus der Datenbank laden (statt losungen.de zu scrapen)
+        $base = $this->db->getBaseLosung($date);
+
+        if (!$base) {
+            $msg = "Keine Basis-Losung für {$date} in der Datenbank. Jahresdaten importieren: scripts/import_losungen.php";
+            error_log("[LOSUNGEN DAILY] ABORT: $msg");
+            echo "❌ {$msg}\n";
+            return false;
+        }
+
+        echo "📖 Basis aus DB: {$base['losung']['reference']} / {$base['lehrtext']['reference']}\n\n";
+
         foreach ($this->availableTranslations as $index => $translation) {
             $translationStartTime = microtime(true);
             
             try {
                 echo sprintf("[%2d/%2d] %4s: ", $index + 1, count($this->availableTranslations), $translation);
                 
-                // Python-Scraper aufrufen
+                // Python-Scraper aufrufen, Bibelstellen aus der Datenbank übergeben
                 $pythonScript = '/var/www/html/scraper.py';
-                $command = "/opt/venv/bin/python3 {$pythonScript} " . escapeshellarg($translation) . " 2>&1";
+                $command = "/opt/venv/bin/python3 {$pythonScript} "
+                    . escapeshellarg($translation) . ' '
+                    . escapeshellarg($base['losung']['reference']) . ' '
+                    . escapeshellarg($base['lehrtext']['reference']) . ' '
+                    . escapeshellarg($base['losung']['text']) . ' '
+                    . escapeshellarg($base['lehrtext']['text']) . ' '
+                    . escapeshellarg($date) . ' 2>&1';
                 $output = shell_exec($command);
                 
                 if (!$output) {
