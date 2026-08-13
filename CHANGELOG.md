@@ -22,6 +22,10 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Fehlt die Losung eines Tages in der Datenbank, bricht der Tagesabruf mit einem
   klaren Hinweis auf den Jahresimport ab, statt einzeln fehlzuschlagen.
 
+### Sonstiges
+- Der Jahresimport läuft auch dort, wo das Entpacken von Archiven nicht direkt
+  zur Verfügung steht.
+
 ## [2.2.0] - 2026-08-01
 
 ### Changed
