@@ -7,6 +7,21 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+### Behoben
+- Die täglichen Übersetzungen werden wieder geladen. Sie waren ausgefallen, weil
+  die Tagesstelle vorab von losungen.de geholt wurde und diese Seite kein
+  gültiges Zertifikat mehr ausliefert. Die Bibelstellen kommen jetzt aus der
+  eigenen Datenbank, in der sie ohnehin schon standen.
+
+### Hinzugefügt
+- Die Losungen eines Jahres lassen sich als offizielle Jahresdatei einlesen,
+  wahlweise per Download oder aus einer heruntergeladenen Datei. Damit ist der
+  Bestand zum Jahreswechsel in einem Schritt aktuell.
+
+### Geändert
+- Fehlt die Losung eines Tages in der Datenbank, bricht der Tagesabruf mit einem
+  klaren Hinweis auf den Jahresimport ab, statt einzeln fehlzuschlagen.
+
 ## [2.2.0] - 2026-08-01
 
 ### Changed

@@ -387,10 +387,20 @@ def get_bible_text_from_bigs(reference):
     except Exception as e:
         return None
 
+def build_base_from_args(losung_ref, lehrtext_ref, losung_text, lehrtext_text, date_str):
+    """Baut die Basisdaten aus übergebenen Argumenten statt sie zu scrapen"""
+    return {
+        "date": date_str,
+        "losung": {"text": losung_text, "reference": losung_ref, "testament": "AT"},
+        "lehrtext": {"text": lehrtext_text, "reference": lehrtext_ref, "testament": "NT"},
+        "source": "Herrnhuter Losungen",
+        "url": "https://www.losungen.de/"
+    }
+
 def main():
     # Kommandozeilenargumente lesen
     translation = sys.argv[1] if len(sys.argv) > 1 else 'LUT'
-    
+
     # Validiere Übersetzung
     if translation not in TRANSLATIONS:
         error_result = {
@@ -399,10 +409,17 @@ def main():
         }
         print(json.dumps(error_result, ensure_ascii=False))
         return
-    
-    # Losungen extrahieren
-    result = extract_losungen_data()
-    
+
+    # Basisdaten: bevorzugt aus Argumenten (Datenbank), sonst von losungen.de scrapen
+    # Aufruf: scraper.py <TRANS> <losung_ref> <lehrtext_ref> <losung_text> <lehrtext_text> [datum]
+    if len(sys.argv) >= 6:
+        result = build_base_from_args(
+            sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5],
+            sys.argv[6] if len(sys.argv) > 6 else None
+        )
+    else:
+        result = extract_losungen_data()
+
     if result and not result.get('error'):
         # Übersetzungsinformationen hinzufügen
         result['translation'] = {

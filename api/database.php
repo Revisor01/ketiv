@@ -151,6 +151,50 @@ class LosungenDatabase {
     }
     
     /**
+     * Lade die Basis-Losung (Herrnhuter Grundbestand) aus der Datenbank
+     * Quelle für Bibelstellen statt Scraping von losungen.de
+     */
+    public function getBaseLosung($date) {
+        try {
+            $pdo = $this->connect();
+
+            $sql = "SELECT date, weekday, holiday, ot_text, ot_reference, nt_text, nt_reference
+                    FROM losungen WHERE date = :date";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['date' => $date]);
+
+            $row = $stmt->fetch();
+
+            if (!$row) {
+                return null;
+            }
+
+            return [
+                'date' => $row['date'],
+                'weekday' => $row['weekday'],
+                'holiday' => $row['holiday'],
+                'losung' => [
+                    'text' => $row['ot_text'],
+                    'reference' => $row['ot_reference'],
+                    'testament' => 'AT'
+                ],
+                'lehrtext' => [
+                    'text' => $row['nt_text'],
+                    'reference' => $row['nt_reference'],
+                    'testament' => 'NT'
+                ],
+                'source' => 'Herrnhuter Losungen',
+                'url' => 'https://www.losungen.de/'
+            ];
+
+        } catch (PDOException $e) {
+            error_log("Failed to get base losung: " . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
      * Lade alle Übersetzungen für ein Datum
      */
     public function getAllTranslations($date) {
