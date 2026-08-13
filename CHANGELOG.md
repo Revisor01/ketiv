@@ -10,6 +10,8 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [2.2.2] - 2026-08-14
 
 ### Sonstiges
+- Die Bauumgebung läuft auf einer aktuellen, noch gepflegten Node-Version. Die
+  bisherige erhält seit April 2025 keine Sicherheitsupdates mehr.
 - Bekannte Sicherheitslücken in den Bibliotheken des Frontends geschlossen:
   von 21 gemeldeten Punkten sind 18 behoben. Die Navigation der Anwendung wurde
   dafür auf eine neue Hauptversion gehoben; Bedienung und Seiten bleiben
