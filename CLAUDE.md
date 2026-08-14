@@ -48,7 +48,7 @@ docker exec -i ketiv-postgres psql -U losungen_user -d losungen_db < db/schema.s
 ### Multi-Container Docker Setup
 - **ketiv-api** (Port 8374): PHP 8.2/Apache backend serving API endpoints
 - **ketiv-frontend** (Port 3030): React/TypeScript frontend application  
-- **postgres** (Port 5432 internal): PostgreSQL 15 database for caching
+- **postgres** (Port 5432 internal): PostgreSQL 18 database for caching
 
 ### Data Flow Architecture
 1. **Base Data**: Herrnhuter Losungen stored in PostgreSQL database

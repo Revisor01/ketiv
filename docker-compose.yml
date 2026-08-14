@@ -43,7 +43,7 @@ services:
       - ketiv-network
 
   postgres:
-    image: postgres:15-alpine
+    image: postgres:18-alpine
     container_name: ketiv-postgres
     restart: unless-stopped
     environment:
@@ -52,7 +52,9 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - TZ=Europe/Berlin
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      # Ab Postgres 18 gehört der Mount auf /var/lib/postgresql;
+      # die Daten liegen darunter in einem versionsbenannten Unterordner.
+      - postgres_data:/var/lib/postgresql
       - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
     # ports:
     #   - "5433:5432"  # Nicht nötig - nur interne Container-Kommunikation
@@ -60,7 +62,7 @@ services:
       - ketiv-network
 
   redis:
-    image: redis:7-alpine
+    image: redis:8-alpine
     container_name: ketiv-redis
     restart: unless-stopped
     environment:
