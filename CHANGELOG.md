@@ -7,6 +7,23 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+## [2.3.0] - 2026-08-14
+
+### Geändert
+- Die Anwendung wird mit einem modernen, aktiv gepflegten Werkzeug gebaut. Das
+  bisherige wurde 2023 eingestellt und war die Ursache für die meisten zuletzt
+  gemeldeten Sicherheitslücken. Der Startvorgang beim Entwickeln ist spürbar
+  schneller, das Ergebnis für Nutzer:innen unverändert.
+- Beim Bauen wird der TypeScript-Code jetzt vollständig geprüft; Tippfehler in
+  Typen brechen den Build, statt erst im Betrieb aufzufallen.
+
+### Hinzugefügt
+- Automatische Tests für das Erkennen von Bibelstellen und den Anmeldebildschirm.
+  Sie laufen bei jeder Änderung mit, bevor eine neue Version gebaut wird.
+
+### Sonstiges
+- Keine bekannten Sicherheitslücken mehr in den Bibliotheken des Frontends.
+
 ## [2.2.2] - 2026-08-14
 
 ### Sonstiges

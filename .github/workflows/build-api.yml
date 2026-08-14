@@ -44,10 +44,9 @@ jobs:
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
           REACT_APP_AUTH_USER: ${{ secrets.REACT_APP_AUTH_USER }}
           REACT_APP_AUTH_PASSWORD: ${{ secrets.REACT_APP_AUTH_PASSWORD }}
-          GENERATE_SOURCEMAP: 'false'
-          CI: 'false'
         run: |
           npm ci
+          npm test
           npm run build
           rm -rf ../public
           cp -R build ../public

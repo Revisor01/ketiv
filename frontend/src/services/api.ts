@@ -6,12 +6,12 @@ class ApiService {
 
   constructor() {
     // API URL basierend auf Environment
-    this.baseUrl = process.env.REACT_APP_API_URL || (
-      process.env.NODE_ENV === 'production' 
-        ? '/api' 
+    this.baseUrl = import.meta.env.REACT_APP_API_URL || (
+      import.meta.env.PROD
+        ? '/api'
         : 'http://localhost:8374'
     );
-    this.apiKey = process.env.REACT_APP_API_KEY || '';
+    this.apiKey = import.meta.env.REACT_APP_API_KEY || '';
   }
 
   // Allow dynamic API key updates

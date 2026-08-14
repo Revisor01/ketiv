@@ -37,7 +37,7 @@ interface CronStatus {
 }
 
 // admin.php liegt an der Domain-Wurzel (Traefik-Route), NICHT unter /api
-const ADMIN_BASE = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8374';
+const ADMIN_BASE = import.meta.env.PROD ? '' : 'http://localhost:8374';
 
 export const AdminPanel: React.FC = () => {
   const { user } = useAuth();
@@ -48,7 +48,7 @@ export const AdminPanel: React.FC = () => {
   const [clearLoading, setClearLoading] = useState(false);
   const [lastAction, setLastAction] = useState<string>('');
 
-  const apiKey = user?.apiKey || process.env.REACT_APP_API_KEY || '';
+  const apiKey = user?.apiKey || import.meta.env.REACT_APP_API_KEY || '';
 
   useEffect(() => {
     loadStatus();
