@@ -7,12 +7,13 @@ WORKDIR /app
 
 # Package files kopieren für besseres Caching
 COPY package.json package-lock.json ./
-RUN npm ci --only=production --silent
+# Vite und TypeScript liegen in devDependencies und werden zum Bauen gebraucht
+RUN npm ci --silent
 
 # Source code kopieren und bauen
 COPY . .
 
-# Build-time configuration (React inlines these into the bundle)
+# Build-time configuration (Vite inlines these into the bundle, siehe envPrefix)
 ARG REACT_APP_API_URL
 ARG REACT_APP_API_KEY
 ARG REACT_APP_AUTH_USER
@@ -49,8 +50,8 @@ RUN echo 'server {' > /etc/nginx/conf.d/default.conf && \
     echo '        add_header Cache-Control "no-cache, no-store, must-revalidate";' >> /etc/nginx/conf.d/default.conf && \
     echo '    }' >> /etc/nginx/conf.d/default.conf && \
     echo '' >> /etc/nginx/conf.d/default.conf && \
-    echo '    # Static Assets Caching' >> /etc/nginx/conf.d/default.conf && \
-    echo '    location /static/ {' >> /etc/nginx/conf.d/default.conf && \
+    echo '    # Static Assets Caching (Vite legt gehashte Dateien unter /assets/ ab)' >> /etc/nginx/conf.d/default.conf && \
+    echo '    location /assets/ {' >> /etc/nginx/conf.d/default.conf && \
     echo '        expires 1y;' >> /etc/nginx/conf.d/default.conf && \
     echo '        add_header Cache-Control "public, immutable";' >> /etc/nginx/conf.d/default.conf && \
     echo '    }' >> /etc/nginx/conf.d/default.conf && \

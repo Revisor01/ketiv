@@ -32,7 +32,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Credentials come from build-time env vars (see frontend/.env.example)
   const VALID_USERS: Record<string, string> = {
-    [process.env.REACT_APP_AUTH_USER || '']: process.env.REACT_APP_AUTH_PASSWORD || ''
+    [import.meta.env.REACT_APP_AUTH_USER || '']: import.meta.env.REACT_APP_AUTH_PASSWORD || ''
   };
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (username && password && expected && expected === password) {
       const userData: User = {
         username,
-        apiKey: process.env.REACT_APP_API_KEY || ''
+        apiKey: import.meta.env.REACT_APP_API_KEY || ''
       };
       
       setUser(userData);
