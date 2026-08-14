@@ -7,6 +7,14 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+## [2.4.0] - 2026-08-14
+
+### Geändert
+- Die Datenbank läuft auf der aktuellen Hauptversion. Der bisherige Stand war
+  zwei Jahre alt; die neue Version wird bis 2030 gepflegt. Alle Inhalte wurden
+  übernommen, für Nutzer:innen ändert sich nichts.
+- Auch der Zwischenspeicher läuft auf der aktuellen Hauptversion.
+
 ## [2.3.0] - 2026-08-14
 
 ### Geändert
