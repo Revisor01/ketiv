@@ -92,7 +92,7 @@ docker exec -i ketiv-postgres psql -U losungen_user -d losungen_db < db/schema.s
 - Local changes are made locally
 - Testing performed via SSH at root@server.godsapp.de
 - Project directory on remote server: `/home/users/revisor/www/simon/losung`
-- Testing URL: losung-konfi-quest.de
+- Testing URL: ketiv.de
 
 ## Memories
 - a

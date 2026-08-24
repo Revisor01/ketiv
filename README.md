@@ -20,8 +20,8 @@ Lesart am Rand. Zwei Fassungen desselben Verses nebeneinander: genau das, was
 diese App tut, wenn sie Übersetzungen vergleicht und Klammern, Auslassungen und
 optionale Verse korrekt auflöst.
 
-Live unter **ketiv.de**. `losung.konfi-quest.de` läuft als Spiegel weiter,
-bis Konfi-Quest auf die neue URL umgestellt ist.
+Live unter **ketiv.de**. Der frühere Spiegel `losung.konfi-quest.de` ist
+abgeschaltet, alle Zugriffe laufen über ketiv.de.
 
 ## Rechtliches
 
