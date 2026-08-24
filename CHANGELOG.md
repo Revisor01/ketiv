@@ -7,6 +7,14 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+### Behoben
+- Die tägliche Losung wurde nicht mehr angezeigt: die Anwendung meldete sich mit
+  einem veralteten Zugangsschlüssel an und wurde abgewiesen.
+
+### Geändert
+- Alle Zugriffe laufen jetzt über ketiv.de. Die frühere Spiegel-Adresse
+  `losung.konfi-quest.de` ist abgeschaltet.
+
 ## [2.4.0] - 2026-08-14
 
 ### Geändert
