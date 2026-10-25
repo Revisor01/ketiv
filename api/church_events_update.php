@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Require authentication
-if (!isAuthenticated()) {
+if (!validateApiKey()) {
     http_response_code(401);
     echo json_encode([
         'success' => false,

@@ -35,3 +35,4 @@ jobs:
         run: |
           php tests/api/admin_login_test.php
           php tests/api/api_key_test.php
+          php tests/api/church_events_update_test.php
