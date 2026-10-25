@@ -8,6 +8,8 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ## [Unreleased]
 
 ### Sicherheit
+- Fehlt die Konfiguration der Zugangsschlüssel, ist die API jetzt gesperrt. Bisher
+  galten in diesem Fall feste Ersatzschlüssel, die im Quelltext standen.
 - Die Anmeldung prüft jetzt der Server. Bisher standen Passwort und
   Zugangsschlüssel in der ausgelieferten Webseite und waren dort lesbar.
 

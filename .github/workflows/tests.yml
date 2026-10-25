@@ -32,4 +32,6 @@ jobs:
         run: for f in api/*.php scripts/*.php tests/api/*.php; do php -l "$f"; done
 
       - name: API tests
-        run: php tests/api/admin_login_test.php
+        run: |
+          php tests/api/admin_login_test.php
+          php tests/api/api_key_test.php

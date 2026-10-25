@@ -72,6 +72,10 @@ description = "Testdaten in Testordnern"
 targetRules = ["label-passwort", "label-api-key"]
 paths = ['''(?i)(?:^|/)(?:tests?|__tests__|spec|[A-Za-z]+Tests)/''']
 
+[[allowlists]]
+description = "Erster Commit: Platzhalter-Schluessel im README, Hinweis auf das Hosting-Panel; geprueft 25.10.2026, kein echter Wert"
+commits = ["d9b3e8be801755ae1f5aab64e73cfe4a416e8593"]
+
 # Oeffentliche Domain dieses Produkts. Pro Repo anpassen oder loeschen.
 # Ohne targetRules: die Regel dafuer kommt erst in CI dazu, und eine Ausnahme
 # fuer eine fehlende Regel bricht das Laden der Konfiguration ab.
