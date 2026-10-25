@@ -54,4 +54,4 @@ jobs:
         if: success()
         run: |
           curl -X POST "${{ secrets.PORTAINER_WEBHOOK }}" \
-            --fail --silent --show-error || echo "Webhook failed but continuing..."
+            --fail --silent --show-error
