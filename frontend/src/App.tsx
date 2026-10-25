@@ -16,8 +16,8 @@ function ProtectedRoutes() {
   const [loginError, setLoginError] = useState<string>('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleLogin = (username: string, password: string) => {
-    const success = login(username, password);
+  const handleLogin = async (username: string, password: string) => {
+    const success = await login(username, password);
     if (!success) {
       setLoginError('Ungültige Anmeldedaten. Bitte versuche es erneut.');
     } else {

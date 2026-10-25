@@ -7,6 +7,10 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+### Sicherheit
+- Die Anmeldung prüft jetzt der Server. Bisher standen Passwort und
+  Zugangsschlüssel in der ausgelieferten Webseite und waren dort lesbar.
+
 ### Behoben
 - Die tägliche Losung wurde nicht mehr angezeigt: die Anwendung meldete sich mit
   einem veralteten Zugangsschlüssel an und wurde abgewiesen.

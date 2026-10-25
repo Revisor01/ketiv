@@ -11,6 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require_once __DIR__ . '/database.php';
 require_once __DIR__ . '/redis_cache.php';
+require_once __DIR__ . '/auth.php';
+
+if (($_GET['action'] ?? '') === 'login') {
+    handleAdminLogin();
+    exit;
+}
 
 // API Key validation
 $apiKeys = [

@@ -1,5 +1,8 @@
 import { ApiResponse, DailyLosung, BibleSearchRequest, BibleSearchResult } from '../types';
 
+// admin.php liegt an der Domain-Wurzel, nicht unter /api.
+export const ADMIN_BASE = import.meta.env.PROD ? '' : 'http://localhost:8374';
+
 class ApiService {
   private baseUrl: string;
   private apiKey: string;
@@ -11,7 +14,7 @@ class ApiService {
         ? '/api'
         : 'http://localhost:8374'
     );
-    this.apiKey = import.meta.env.REACT_APP_API_KEY || '';
+    this.apiKey = '';
   }
 
   // Allow dynamic API key updates

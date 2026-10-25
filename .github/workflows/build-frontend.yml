@@ -49,9 +49,6 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             REACT_APP_API_URL=${{ vars.REACT_APP_API_URL || 'https://ketiv.de' }}
-            REACT_APP_API_KEY=${{ secrets.REACT_APP_API_KEY }}
-            REACT_APP_AUTH_USER=${{ secrets.REACT_APP_AUTH_USER }}
-            REACT_APP_AUTH_PASSWORD=${{ secrets.REACT_APP_AUTH_PASSWORD }}
 
       - name: Trigger Stack Webhook
         if: success()

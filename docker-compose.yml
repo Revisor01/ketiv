@@ -15,6 +15,8 @@ services:
       - API_KEY_1=${API_KEY_1}
       - API_KEY_2=${API_KEY_2}
       - API_KEY_3=${API_KEY_3}
+      - ADMIN_USER=${ADMIN_USER}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - TZ=Europe/Berlin
       - DB_HOST=postgres
       - DB_NAME=losungen_db

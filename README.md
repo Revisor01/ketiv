@@ -105,9 +105,10 @@ Zwei Workflows:
   `public/` ins Image — das ist die Landingpage auf der API-Wurzel. `public/` ist
   deshalb ein Build-Artefakt und liegt bewusst nicht im Repository.
 
-Die Build-Zugangsdaten liegen als GitHub-Secrets (`REACT_APP_API_KEY`,
-`REACT_APP_AUTH_USER`, `REACT_APP_AUTH_PASSWORD`); die Laufzeit-Keys der API
-(`API_KEY_1` bis `API_KEY_3`) als Stack-Variablen in Portainer.
+Das Frontend-Bundle enthält keine Zugangsdaten. Die Anmeldung prüft der Server
+(`admin.php?action=login`) gegen `ADMIN_USER` und `ADMIN_PASSWORD` und gibt danach
+`API_KEY_1` an die Oberfläche. Alle diese Werte sind Umgebungsvariablen der API,
+zusammen mit den Laufzeit-Keys `API_KEY_1` bis `API_KEY_3`.
 
 Manuelles Deployment, falls nötig:
 
@@ -137,6 +138,8 @@ docker-compose up -d --build
          - API_KEY_1=${API_KEY_1}
          - API_KEY_2=${API_KEY_2}
          - API_KEY_3=${API_KEY_3}
+         - ADMIN_USER=${ADMIN_USER}
+         - ADMIN_PASSWORD=${ADMIN_PASSWORD}
          - BIBLESERVER_API_KEY=${BIBLESERVER_API_KEY}
          - TZ=Europe/Berlin
        volumes:
@@ -404,6 +407,8 @@ services:
       - API_KEY_1=${API_KEY_1}
       - API_KEY_2=${API_KEY_2}
       - API_KEY_3=${API_KEY_3}
+      - ADMIN_USER=${ADMIN_USER}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
       - TZ=Europe/Berlin
     volumes:
       - ./logs:/var/log/apache2

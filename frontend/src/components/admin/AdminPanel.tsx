@@ -11,6 +11,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useAuth } from '../../context/AuthContext';
 import { BibleAbbreviations } from './BibleAbbreviations';
+import { ADMIN_BASE } from '../../services/api';
 
 interface SystemStatus {
   server_time: string;
@@ -36,9 +37,6 @@ interface CronStatus {
   next_expected?: string;
 }
 
-// admin.php liegt an der Domain-Wurzel (Traefik-Route), NICHT unter /api
-const ADMIN_BASE = import.meta.env.PROD ? '' : 'http://localhost:8374';
-
 export const AdminPanel: React.FC = () => {
   const { user } = useAuth();
   const [systemStatus, setSystemStatus] = useState<SystemStatus | null>(null);
@@ -48,7 +46,7 @@ export const AdminPanel: React.FC = () => {
   const [clearLoading, setClearLoading] = useState(false);
   const [lastAction, setLastAction] = useState<string>('');
 
-  const apiKey = user?.apiKey || import.meta.env.REACT_APP_API_KEY || '';
+  const apiKey = user?.apiKey || '';
 
   useEffect(() => {
     loadStatus();
