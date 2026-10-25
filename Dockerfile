@@ -62,8 +62,9 @@ RUN chown -R www-data:www-data /var/www/html \
 RUN ln -sf /dev/stdout /var/log/apache2/access.log \
     && ln -sf /dev/stderr /var/log/apache2/error.log
 
-# Configure PHP to log errors to stderr and set timezone
-RUN echo 'log_errors = On' >> /usr/local/etc/php/conf.d/docker-php-errors.ini \
+# Fehler gehen ins Log, nie in die Antwort: sie verraten sonst Serverpfade.
+RUN echo 'display_errors = Off' >> /usr/local/etc/php/conf.d/docker-php-errors.ini \
+    && echo 'log_errors = On' >> /usr/local/etc/php/conf.d/docker-php-errors.ini \
     && echo 'error_log = /dev/stderr' >> /usr/local/etc/php/conf.d/docker-php-errors.ini \
     && echo 'date.timezone = Europe/Berlin' >> /usr/local/etc/php/conf.d/docker-php-errors.ini
 

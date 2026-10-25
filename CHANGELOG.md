@@ -7,7 +7,11 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+### Behoben
+- Änderungen an Kirchenjahres-Terminen in der Verwaltung ließen sich nicht speichern; der Server brach jede Anfrage mit einem Fehler ab.
+
 ### Sicherheit
+- Fehlermeldungen des Servers erscheinen nicht mehr in den Antworten der API.
 - Fehlt die Konfiguration der Zugangsschlüssel, ist die API jetzt gesperrt. Bisher
   galten in diesem Fall feste Ersatzschlüssel, die im Quelltext standen.
 - Die Anmeldung prüft jetzt der Server. Bisher standen Passwort und
