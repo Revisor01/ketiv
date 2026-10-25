@@ -25,24 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 require_once 'database.php';
-
-// API-Key Validierung
-function validateApiKey() {
-    $validApiKeys = [
-        $_ENV['API_KEY_1'] ?? 'default-key-1',
-        $_ENV['API_KEY_2'] ?? 'default-key-2', 
-        $_ENV['API_KEY_3'] ?? 'default-key-3'
-    ];
-    
-    // API-Key aus Header oder Query-Parameter
-    $providedKey = $_SERVER['HTTP_X_API_KEY'] ?? $_GET['api_key'] ?? null;
-    
-    if (!$providedKey) {
-        return false;
-    }
-    
-    return in_array($providedKey, $validApiKeys);
-}
+require_once 'auth.php';
 
 // Simple Rate Limiting
 function checkRateLimit() {

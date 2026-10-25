@@ -467,11 +467,11 @@ docker-compose exec ketiv-api bash
 3. **API testen**
    ```bash
    # Grundfunktion testen
-   curl -H "X-API-Key: default-key-1" "http://localhost:8374/"
+   curl -H "X-API-Key: $API_KEY_1" "http://localhost:8374/"
    
    # Verschiedene Übersetzungen testen
-   curl -H "X-API-Key: default-key-1" "http://localhost:8374/?translation=HFA"
-   curl -H "X-API-Key: default-key-1" "http://localhost:8374/?translation=NIV"
+   curl -H "X-API-Key: $API_KEY_1" "http://localhost:8374/?translation=HFA"
+   curl -H "X-API-Key: $API_KEY_1" "http://localhost:8374/?translation=NIV"
    ```
 
 ### Projekt-Struktur
