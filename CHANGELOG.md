@@ -26,6 +26,9 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Alle Zugriffe laufen jetzt über ketiv.de. Die frühere Spiegel-Adresse
   `losung.konfi-quest.de` ist abgeschaltet.
 
+### Sonstiges
+- Englische Fassung der README und der Vorlagen für Fehlermeldungen.
+
 ## [2.4.0] - 2026-08-14
 
 ### Geändert
