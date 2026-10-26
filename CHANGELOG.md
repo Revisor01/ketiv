@@ -22,6 +22,7 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   einem veralteten Zugangsschlüssel an und wurde abgewiesen.
 
 ### Geändert
+- Neue Lizenz: GNU AGPL v3.0 statt MIT: Wer die Software verändert und anderen bereitstellt, auch als Webdienst, legt seine Änderungen offen. Eine kommerzielle Lizenz gibt es auf Anfrage.
 - Alle Zugriffe laufen jetzt über ketiv.de. Die frühere Spiegel-Adresse
   `losung.konfi-quest.de` ist abgeschaltet.
 

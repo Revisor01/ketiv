@@ -135,8 +135,14 @@ Beiträge stehen in [CLAUDE.md](CLAUDE.md).
 
 ## Lizenz
 
-Der Quelltext steht unter der [MIT-Lizenz](LICENSE). Für die Texte, die Ketiv
-anzeigt, gilt sie nicht — siehe Hinweis.
+Ketiv steht unter der
+[GNU Affero General Public License v3.0](LICENSE). Wer Ketiv verändert und
+anderen zur Verfügung stellt, auch als Webdienst, legt seinen Quelltext unter
+derselben Lizenz offen. Wer das nicht möchte, bekommt auf Anfrage eine
+kommerzielle Lizenz ([mail@simonluthe.de](mailto:mail@simonluthe.de)). Für
+Beiträge gilt [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Für die Texte, die Ketiv anzeigt, gilt sie nicht — siehe Hinweis.
 
 ## Hinweis
 
