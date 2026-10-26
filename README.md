@@ -6,6 +6,10 @@
 </p>
 
 <p align="center">
+  <b>Deutsch</b> · <a href="README.en.md">English</a>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/PHP-8.2-777bb4?logo=php" alt="PHP">
   <img src="https://img.shields.io/badge/React-Vite-61dafb?logo=react" alt="React">
   <img src="https://img.shields.io/github/license/Revisor01/ketiv" alt="Lizenz">
@@ -131,16 +135,14 @@ Fehlermeldungen und Vorschläge sind willkommen — gern als
 [Issue](https://github.com/Revisor01/ketiv/issues). Sicherheitslücken bitte
 vertraulich melden, wie in [SECURITY.md](SECURITY.md) beschrieben. Pull
 Requests laufen durch Tests und einen Secret-Scan; die Grundsätze für
-Beiträge stehen in [CLAUDE.md](CLAUDE.md).
+Beiträge stehen in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Lizenz
 
-Ketiv steht unter der
-[GNU Affero General Public License v3.0](LICENSE). Wer Ketiv verändert und
-anderen zur Verfügung stellt, auch als Webdienst, legt seinen Quelltext unter
-derselben Lizenz offen. Wer das nicht möchte, bekommt auf Anfrage eine
-kommerzielle Lizenz ([mail@simonluthe.de](mailto:mail@simonluthe.de)). Für
-Beiträge gilt [CONTRIBUTING.md](CONTRIBUTING.md).
+Ketiv steht unter der [GNU Affero General Public License v3.0](LICENSE). Wer
+Ketiv verändert und anderen zur Verfügung stellt, auch als Webdienst, legt
+seinen Quelltext unter derselben Lizenz offen. Für Beiträge gilt
+[CONTRIBUTING.md](CONTRIBUTING.md).
 
 Für die Texte, die Ketiv anzeigt, gilt sie nicht — siehe Hinweis.
 
