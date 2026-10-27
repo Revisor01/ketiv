@@ -29,7 +29,7 @@ jobs:
       packages: write
     with:
       image: ghcr.io/${{ github.repository }}-api
-      node-version: "22"
+      node-version: "26"
       # Das API-Image liefert den Build von frontend/ als Startseite (public/) aus.
       vorbereitung: |
         cd frontend
