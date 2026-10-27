@@ -9,6 +9,8 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ### Behoben
 - Änderungen an Kirchenjahres-Terminen in der Verwaltung ließen sich nicht speichern; der Server brach jede Anfrage mit einem Fehler ab.
+- Die tägliche Losung wurde nicht mehr angezeigt: die Anwendung meldete sich mit
+  einem veralteten Zugangsschlüssel an und wurde abgewiesen.
 
 ### Sicherheit
 - Fehlermeldungen des Servers erscheinen nicht mehr in den Antworten der API.
@@ -17,10 +19,6 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Die Anmeldung prüft jetzt der Server. Bisher standen Passwort und
   Zugangsschlüssel in der ausgelieferten Webseite und waren dort lesbar.
 - Ein Werkzeug, mit dem das Stylesheet gebaut wird, auf eine Version ohne bekannte Sicherheitslücke angehoben. Das ausgelieferte Stylesheet ist unverändert.
-
-### Behoben
-- Die tägliche Losung wurde nicht mehr angezeigt: die Anwendung meldete sich mit
-  einem veralteten Zugangsschlüssel an und wurde abgewiesen.
 
 ### Geändert
 - Neue Lizenz: GNU AGPL v3.0 statt MIT: Wer die Software verändert und anderen bereitstellt, auch als Webdienst, legt seine Änderungen offen. Eine kommerzielle Lizenz gibt es auf Anfrage.
