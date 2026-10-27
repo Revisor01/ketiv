@@ -27,7 +27,7 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   `losung.konfi-quest.de` ist abgeschaltet.
 
 ### Sonstiges
-- Englische Fassung der README und der Vorlagen für Fehlermeldungen.
+- README, Vorlagen und Hinweise gibt es nur noch auf Deutsch.
 
 ## [2.4.0] - 2026-08-14
 
