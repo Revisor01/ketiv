@@ -6,10 +6,6 @@
 </p>
 
 <p align="center">
-  <b>Deutsch</b> · <a href="README.en.md">English</a>
-</p>
-
-<p align="center">
   <img src="https://img.shields.io/badge/PHP-8.2-777bb4?logo=php" alt="PHP">
   <img src="https://img.shields.io/badge/React-Vite-61dafb?logo=react" alt="React">
   <img src="https://img.shields.io/github/license/Revisor01/ketiv" alt="Lizenz">

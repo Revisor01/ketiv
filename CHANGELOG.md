@@ -16,6 +16,7 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   galten in diesem Fall feste Ersatzschlüssel, die im Quelltext standen.
 - Die Anmeldung prüft jetzt der Server. Bisher standen Passwort und
   Zugangsschlüssel in der ausgelieferten Webseite und waren dort lesbar.
+- Ein Werkzeug, mit dem das Stylesheet gebaut wird, auf eine Version ohne bekannte Sicherheitslücke angehoben. Das ausgelieferte Stylesheet ist unverändert.
 
 ### Behoben
 - Die tägliche Losung wurde nicht mehr angezeigt: die Anwendung meldete sich mit
@@ -27,7 +28,7 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   `losung.konfi-quest.de` ist abgeschaltet.
 
 ### Sonstiges
-- Englische Fassung der README und der Vorlagen für Fehlermeldungen.
+- README, Vorlagen und Hinweise gibt es nur noch auf Deutsch.
 
 ## [2.4.0] - 2026-08-14
 
@@ -193,6 +194,10 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 Die Einträge vor 2.1.0 sind aus der ursprünglichen Git-History rekonstruiert.
 Da diese beim Zusammenfassen entfernt wurde, gibt es für sie keine Tags.
 
-[Unreleased]: https://github.com/Revisor01/ketiv/compare/v2.2.0...HEAD
+[Unreleased]: https://github.com/Revisor01/ketiv/compare/v2.4.0...HEAD
+[2.4.0]: https://github.com/Revisor01/ketiv/compare/v2.3.0...v2.4.0
+[2.3.0]: https://github.com/Revisor01/ketiv/compare/v2.2.2...v2.3.0
+[2.2.2]: https://github.com/Revisor01/ketiv/compare/v2.2.1...v2.2.2
+[2.2.1]: https://github.com/Revisor01/ketiv/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/Revisor01/ketiv/releases/tag/v2.2.0
 [2.1.0]: https://github.com/Revisor01/ketiv/releases/tag/v2.1.0
