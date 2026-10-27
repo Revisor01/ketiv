@@ -1,0 +1,218 @@
+openapi: 3.1.0
+info:
+  title: Ketiv – öffentliche Tageslosung
+  version: 1.0.0
+  description: |
+    Tageslosung ohne API-Schlüssel, gedacht für das Widget unter `/widget.js`
+    und eigene Einbindungen auf Websites. Der Endpunkt liefert nur, was der
+    tägliche Abruf bereits gespeichert hat; er fragt selbst keine Bibelquelle an.
+
+    Die Losungen sind urheberrechtlich geschützt. Wer sie anzeigt, hält sich an
+    die [Nutzungsbedingungen](https://www.losungen.de/digital/nutzungsbedingungen):
+    immer Losung und Lehrtext, keine Änderungen an Text und Stellenangabe, nur
+    auf nicht kommerziellen Seiten, mit dem Hinweis aus `data.quelle`.
+
+    Die schlüsselgeschützte API (`/api/?api_key=…`, Bibelsuche, Kirchenjahr)
+    ist in [api.md](api.md) beschrieben und bleibt unverändert.
+  license:
+    name: AGPL-3.0
+    identifier: AGPL-3.0-only
+servers:
+  - url: https://ketiv.de
+paths:
+  /api/v1/tageslosung:
+    get:
+      summary: Tageslosung eines Tages
+      description: |
+        Ohne Anmeldung. CORS ist für alle Herkünfte offen (`*`), aber nur für
+        GET, HEAD und OPTIONS. Erfolgreiche Antworten sind bis Mitternacht
+        (Europe/Berlin) cachebar und tragen ein `ETag`; mit `If-None-Match`
+        antwortet der Server `304`.
+
+        Begrenzung je Besucher-IP: 6000 Anfragen in 10 Minuten. Die Grenze gilt
+        nie je Herkunft (Origin/Referer), damit stark besuchte Gemeindeseiten
+        nicht gesperrt werden.
+      operationId: getTageslosung
+      parameters:
+        - name: translation
+          in: query
+          required: false
+          description: |
+            Übersetzung. `LUT` ist der Text der Losungen selbst; andere Codes
+            liefern die gespeicherte Übersetzung derselben Stellen. Groß- und
+            Kleinschreibung ist egal.
+          schema:
+            type: string
+            default: LUT
+            enum: [LUT, ELB, HFA, SLT, ZB, GNB, NGÜ, EU, NLB, NeÜ, BIGS, NIV, ESV, LSG]
+        - name: date
+          in: query
+          required: false
+          description: Datum (JJJJ-MM-TT), heute oder bis zu drei Tage davor oder danach. Ohne Angabe gilt heute in Europe/Berlin.
+          schema:
+            type: string
+            format: date
+        - name: If-None-Match
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Losung und Lehrtext mit Quellenangabe
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                examples: ['public, max-age=32400']
+            ETag:
+              schema:
+                type: string
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                const: '*'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Antwort'
+              example:
+                success: true
+                data:
+                  date: '2026-10-27'
+                  formatted_date: Dienstag, 27. Oktober 2026
+                  weekday: Dienstag
+                  holiday: null
+                  losung:
+                    text: Steh auf, Gott, richte die Erde, denn dein Eigentum sind die Nationen alle.
+                    reference: Psalm 82,8
+                    bibleserver_url: https://www.bibleserver.com/LUT/Psalm82%2C8
+                  lehrtext:
+                    text: …
+                    reference: …
+                    bibleserver_url: https://www.bibleserver.com/LUT/…
+                  translation:
+                    code: LUT
+                    name: Lutherbibel, revidiert 2017
+                    copyright: © 2016 Deutsche Bibelgesellschaft, Stuttgart
+                  quelle:
+                    name: Die Losungen
+                    copyright: © Evangelische Brüder-Unität – Herrnhuter Brüdergemeine
+                    copyright_url: https://www.herrnhuter.de
+                    info_text: Weitere Informationen finden Sie hier.
+                    info_url: https://www.losungen.de
+        '304':
+          description: Unverändert (ETag passt)
+        '400':
+          description: Unbekannte Übersetzung oder Datum außerhalb des erlaubten Bereichs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fehler'
+              example:
+                success: false
+                error: Unbekannte Übersetzung.
+                erlaubt: [LUT, ELB, HFA, SLT, ZB, GNB, NGÜ, EU, NLB, NeÜ, BIGS, NIV, ESV, LSG]
+        '404':
+          description: Für das Datum liegt keine Losung oder die Übersetzung noch nicht vor. Es wird nichts nachgeladen.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fehler'
+        '405':
+          description: Andere Methode als GET, HEAD oder OPTIONS
+        '429':
+          description: Zu viele Anfragen von dieser IP
+          headers:
+            Retry-After:
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fehler'
+        '503':
+          description: Datenbank gerade nicht erreichbar
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fehler'
+components:
+  schemas:
+    Vers:
+      type: object
+      required: [text, reference, bibleserver_url]
+      properties:
+        text:
+          type: string
+        reference:
+          type: string
+          description: Stellenangabe, z. B. „Psalm 82,8“
+        bibleserver_url:
+          type: string
+          format: uri
+          description: Link zur Stelle bei ERF Bibleserver (bei BIGS zur Bibel in gerechter Sprache)
+    Antwort:
+      type: object
+      required: [success, data]
+      properties:
+        success:
+          type: boolean
+          const: true
+        data:
+          type: object
+          required: [date, formatted_date, weekday, holiday, losung, lehrtext, translation, quelle]
+          properties:
+            date:
+              type: string
+              format: date
+            formatted_date:
+              type: string
+            weekday:
+              type: string
+            holiday:
+              type: [string, 'null']
+            losung:
+              $ref: '#/components/schemas/Vers'
+            lehrtext:
+              $ref: '#/components/schemas/Vers'
+            translation:
+              type: object
+              required: [code, name, copyright]
+              properties:
+                code:
+                  type: string
+                name:
+                  type: string
+                copyright:
+                  type: [string, 'null']
+            quelle:
+              type: object
+              description: Pflichtangaben nach den Nutzungsbedingungen der Losungen
+              required: [name, copyright, copyright_url, info_text, info_url]
+              properties:
+                name:
+                  type: string
+                copyright:
+                  type: string
+                copyright_url:
+                  type: string
+                  format: uri
+                info_text:
+                  type: string
+                info_url:
+                  type: string
+                  format: uri
+    Fehler:
+      type: object
+      required: [success, error]
+      properties:
+        success:
+          type: boolean
+          const: false
+        error:
+          type: string
+        erlaubt:
+          type: array
+          items:
+            type: string

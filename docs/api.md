@@ -3,6 +3,13 @@
 Die öffentliche Oberfläche unter [ketiv.de](https://ketiv.de) nutzt dieselbe API.
 Beispiele verwenden `https://api.example.com` als Platzhalter für die eigene Instanz.
 
+## Tageslosung ohne Schlüssel
+
+`GET /api/v1/tageslosung?translation=LUT` liefert die Tageslosung ohne
+API-Schlüssel, für Websites und das Widget `/widget.js`. Beschreibung als
+OpenAPI 3.1 in [openapi.yaml](openapi.yaml), Einbindung im README unter
+„Tageslosung einbinden“. Alles Folgende betrifft die Schlüssel-API.
+
 ## Anmeldung
 
 Die API verwendet API-Key basierte Authentifizierung für sicheren Zugriff.
