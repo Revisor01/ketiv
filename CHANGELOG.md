@@ -193,6 +193,10 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 Die Einträge vor 2.1.0 sind aus der ursprünglichen Git-History rekonstruiert.
 Da diese beim Zusammenfassen entfernt wurde, gibt es für sie keine Tags.
 
-[Unreleased]: https://github.com/Revisor01/ketiv/compare/v2.2.0...HEAD
+[Unreleased]: https://github.com/Revisor01/ketiv/compare/v2.4.0...HEAD
+[2.4.0]: https://github.com/Revisor01/ketiv/compare/v2.3.0...v2.4.0
+[2.3.0]: https://github.com/Revisor01/ketiv/compare/v2.2.2...v2.3.0
+[2.2.2]: https://github.com/Revisor01/ketiv/compare/v2.2.1...v2.2.2
+[2.2.1]: https://github.com/Revisor01/ketiv/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/Revisor01/ketiv/releases/tag/v2.2.0
 [2.1.0]: https://github.com/Revisor01/ketiv/releases/tag/v2.1.0
