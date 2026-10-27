@@ -1,8 +1,6 @@
 <?php
 
-/**
- * Redis Cache Manager für Bibeltext-Suche
- */
+/** Redis Cache Manager für Bibeltext-Suche */
 class RedisCache {
     private $redis;
     private $enabled;
@@ -33,9 +31,6 @@ class RedisCache {
         }
     }
 
-    /**
-     * Erstelle Cache-Key für Bibeltext-Suche
-     */
     private function createKey($reference, $translation) {
         // Normalisiere Referenz für konsistente Keys
         $normalizedRef = strtolower(trim($reference));
@@ -44,9 +39,6 @@ class RedisCache {
         return "bible:" . md5($normalizedRef . ":" . $translation);
     }
 
-    /**
-     * Hole gecachte Bibeltext-Suche
-     */
     public function get($reference, $translation) {
         if (!$this->enabled) {
             return null;
@@ -72,9 +64,6 @@ class RedisCache {
         }
     }
 
-    /**
-     * Speichere Bibeltext-Suche im Cache
-     */
     public function set($reference, $translation, $data, $ttl = null) {
         if (!$this->enabled) {
             return false;
@@ -104,9 +93,6 @@ class RedisCache {
         }
     }
 
-    /**
-     * Lösche spezifischen Cache-Entry
-     */
     public function delete($reference, $translation) {
         if (!$this->enabled) {
             return false;
@@ -124,9 +110,6 @@ class RedisCache {
         }
     }
 
-    /**
-     * Lösche gesamten Bible Cache
-     */
     public function flush() {
         if (!$this->enabled) {
             return false;
@@ -147,9 +130,6 @@ class RedisCache {
         }
     }
 
-    /**
-     * Cache-Statistiken
-     */
     public function getStats() {
         if (!$this->enabled) {
             return ['enabled' => false];
@@ -176,9 +156,6 @@ class RedisCache {
         }
     }
 
-    /**
-     * Prüfe ob Cache verfügbar ist
-     */
     public function isEnabled() {
         return $this->enabled;
     }

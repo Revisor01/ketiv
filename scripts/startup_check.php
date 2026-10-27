@@ -1,9 +1,6 @@
 #!/usr/bin/env php
 <?php
-/**
- * Startup Check - Prüft beim Container-Start ob heutige Daten vorhanden sind
- * Falls nicht, wird automatisch ein Fetch ausgeführt
- */
+/** Lädt beim Container-Start die Daten für heute, falls sie fehlen. */
 
 require_once '/var/www/html/database.php';
 

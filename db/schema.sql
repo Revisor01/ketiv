@@ -1,5 +1,4 @@
--- PostgreSQL Schema für Losungen API Cache
--- Erstellt: 2025-07-31
+-- PostgreSQL-Schema für den Losungen-Cache.
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
@@ -98,7 +97,3 @@ COMMENT ON TABLE daily_losungen IS 'Tägliche Herrnhuter Losungen Original-Daten
 COMMENT ON TABLE translation_cache IS 'Cache für alle Bibelübersetzungen der täglichen Losungen';
 COMMENT ON VIEW daily_translations_summary IS 'Zusammenfassung aller Übersetzungen pro Tag';
 COMMENT ON FUNCTION cleanup_old_translations() IS 'Entfernt Übersetzungen älter als 90 Tage';
-
--- Beispiel-Query für API-Zugriff
--- SELECT * FROM translation_cache WHERE date = CURRENT_DATE AND translation_code = 'HFA';
--- SELECT * FROM daily_translations_summary WHERE date = CURRENT_DATE;

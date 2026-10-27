@@ -1,8 +1,5 @@
 <?php
-/**
- * Church Events Update API
- * Updates church event fields
- */
+/** Ändert Felder eines liturgischen Termins. */
 
 require_once 'database.php';
 require_once 'auth.php';

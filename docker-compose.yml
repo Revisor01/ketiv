@@ -54,12 +54,9 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - TZ=Europe/Berlin
     volumes:
-      # Ab Postgres 18 gehört der Mount auf /var/lib/postgresql;
-      # die Daten liegen darunter in einem versionsbenannten Unterordner.
+      # Ab Postgres 18 gehört der Mount auf /var/lib/postgresql.
       - postgres_data:/var/lib/postgresql
       - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
-    # ports:
-    #   - "5433:5432"  # Nicht nötig - nur interne Container-Kommunikation
     networks:
       - ketiv-network
 

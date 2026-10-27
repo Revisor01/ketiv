@@ -51,8 +51,7 @@ RUN echo 'RewriteEngine On' > /var/www/html/.htaccess \
     && echo 'RewriteCond %{QUERY_STRING} !api_key=' >> /var/www/html/.htaccess \
     && echo 'RewriteRule ^/?$ /public/index.html [L]' >> /var/www/html/.htaccess
 
-# Cron for daily translation cache at 00:02 (base Losungen come from DB)
-# Env vars for the job are written to /etc/container.env by start.sh
+# Täglicher Übersetzungs-Cache um 00:02; die Umgebung für den Job schreibt start.sh nach /etc/container.env.
 COPY docker/cron.d/daily-fetch /etc/cron.d/daily-fetch
 RUN chmod 0644 /etc/cron.d/daily-fetch
 

@@ -105,22 +105,12 @@ def normalize_book_name(book_ref):
     return book_mappings.get(book_ref, book_ref)
 
 def generate_bibleserver_url(reference, translation='LUT'):
-    """
-    Generiert ERF Bibleserver URLs für Bibelstellen
-    
-    Args:
-        reference: Bibelstelle wie "Johannes 3,16" oder "Psalm 23,1-6"
-        translation: Übersetzungscode wie 'LUT', 'HFA', etc.
-    
-    Returns:
-        URL string oder None wenn nicht unterstützt
-    """
+    """Generiert die ERF-Bibleserver-URL oder None, wenn die Übersetzung nicht unterstützt wird."""
     # Prüfen ob Übersetzung unterstützt wird
     bibleserver_code = BIBLESERVER_TRANSLATIONS.get(translation)
     if not bibleserver_code:
         return None
     
-    # Referenz parsen
     # Format: "Buchname Kapitel,Vers" oder "Buchname Kapitel,Vers-Vers"
     pattern = r'^(.+?)\s+(\d+),(\d+)(?:-(\d+))?$'
     match = re.match(pattern, reference.strip())

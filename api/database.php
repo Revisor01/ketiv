@@ -1,8 +1,5 @@
 <?php
-/**
- * PostgreSQL Database Handler für Losungen API
- * Verwaltet Cache für tägliche Losungen in allen Übersetzungen
- */
+/** Datenbankzugriff für die Losungen in allen Übersetzungen. */
 
 class LosungenDatabase {
     private $pdo = null;
@@ -18,9 +15,6 @@ class LosungenDatabase {
         $this->password = $_ENV['DB_PASSWORD'] ?? '';
     }
     
-    /**
-     * Verbindung zur Datenbank aufbauen
-     */
     private function connect() {
         if ($this->pdo === null) {
             // Eine geteilte PDO-Verbindung pro Request statt mehrerer paralleler
@@ -29,9 +23,6 @@ class LosungenDatabase {
         return $this->pdo;
     }
     
-    /**
-     * Speichere eine Übersetzung in der Datenbank
-     */
     public function saveTranslation($date, $translationCode, $data) {
         try {
             $pdo = $this->connect();
@@ -94,9 +85,6 @@ class LosungenDatabase {
         }
     }
     
-    /**
-     * Lade eine Übersetzung aus der Datenbank
-     */
     public function getTranslation($date, $translationCode) {
         try {
             $pdo = $this->connect();
@@ -150,10 +138,7 @@ class LosungenDatabase {
         }
     }
     
-    /**
-     * Lade die Basis-Losung (Herrnhuter Grundbestand) aus der Datenbank
-     * Quelle für Bibelstellen statt Scraping von losungen.de
-     */
+    /** Basis-Losung aus der DB statt Scraping von losungen.de. */
     public function getBaseLosung($date) {
         try {
             $pdo = $this->connect();
@@ -194,9 +179,6 @@ class LosungenDatabase {
         }
     }
 
-    /**
-     * Lade alle Übersetzungen für ein Datum
-     */
     public function getAllTranslations($date) {
         try {
             $pdo = $this->connect();
@@ -246,9 +228,6 @@ class LosungenDatabase {
         }
     }
     
-    /**
-     * Prüfe ob für ein Datum bereits Daten vorhanden sind
-     */
     public function hasDataForDate($date) {
         try {
             $pdo = $this->connect();
@@ -267,9 +246,6 @@ class LosungenDatabase {
         }
     }
     
-    /**
-     * Speichere Original Losungen-Daten
-     */
     public function saveDailyLosung($date, $originalData) {
         try {
             $pdo = $this->connect();
@@ -294,9 +270,6 @@ class LosungenDatabase {
         }
     }
     
-    /**
-     * Cleanup alte Daten
-     */
     public function cleanup() {
         try {
             $pdo = $this->connect();
@@ -313,9 +286,6 @@ class LosungenDatabase {
         }
     }
     
-    /**
-     * Statistiken abrufen
-     */
     public function getStats() {
         try {
             $pdo = $this->connect();

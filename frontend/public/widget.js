@@ -1,8 +1,5 @@
-/*
- * Ketiv-Widget: zeigt die Tageslosung auf einer beliebigen Website.
- * Einbindung und Optionen: README, Abschnitt „Tageslosung einbinden“.
- * Lizenz: AGPL-3.0, https://github.com/Revisor01/ketiv
- */
+/* Ketiv-Widget: zeigt die Tageslosung auf einer Website; Einbindung im README. */
+/* Lizenz: AGPL-3.0, https://github.com/Revisor01/ketiv */
 (function () {
   'use strict';
 

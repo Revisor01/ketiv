@@ -1,8 +1,5 @@
 <?php
-/**
- * Losungen Database API
- * Serves daily readings from database instead of scraping
- */
+/** Losungen-API aus der Datenbank. */
 
 require_once 'database.php';
 require_once 'auth.php';
@@ -113,9 +110,6 @@ try {
     ], JSON_UNESCAPED_UNICODE);
 }
 
-/**
- * Format date in German locale
- */
 function formatGermanDate($date, $weekday) {
     $germanMonths = [
         1 => 'Januar', 2 => 'Februar', 3 => 'März', 4 => 'April',

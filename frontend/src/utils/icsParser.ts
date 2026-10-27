@@ -25,9 +25,7 @@ export interface ChurchEvent {
 }
 
 export class ICSParser {
-  /**
-   * Parst ICS-Kalender-Daten für Kirchenjahr-Events
-   */
+  /** Parst ICS-Kalender-Daten für Kirchenjahr-Events */
   static parseICS(icsContent: string): ChurchEvent[] {
     const events: ChurchEvent[] = [];
     const lines = icsContent.split('\n').map(line => line.trim());
@@ -110,8 +108,7 @@ export class ICSParser {
   }
   
   private static parseDate(dateString: string): Date {
-    // Handle different date formats from ICS
-    // Format: 20181202 00:00:00 or 20181202
+    // Formate: "20181202 00:00:00" oder "20181202".
     const cleanDate = dateString.replace(/\s+.*$/, '').replace(/[^\d]/g, '');
     
     if (cleanDate.length >= 8) {
@@ -128,8 +125,7 @@ export class ICSParser {
   private static parseDescription(event: Partial<ChurchEvent>, description: string) {
     console.log('Raw description:', description);
     
-    // The description from ICS is already joined by the main parser, but contains literal \n
-    // Convert literal \n to actual newlines and fix broken words
+    // Die ICS-Beschreibung enthält literale \n.
     let cleanText = description.replace(/\\n/g, '\n');
     
     // Fix broken words that were split across lines (common ICS issue)
@@ -242,9 +238,7 @@ export class ICSParser {
     });
   }
   
-  /**
-   * Findet Events für ein bestimmtes Datum
-   */
+  /** Findet Events für ein bestimmtes Datum */
   static findEventsForDate(events: ChurchEvent[], date: Date): ChurchEvent[] {
     const targetDate = new Date(date);
     targetDate.setHours(0, 0, 0, 0); // Normalize to start of day
@@ -256,9 +250,7 @@ export class ICSParser {
     });
   }
   
-  /**
-   * Findet das nächste Event nach einem Datum
-   */
+  /** Findet das nächste Event nach einem Datum */
   static findNextEvent(events: ChurchEvent[], fromDate: Date = new Date()): ChurchEvent | null {
     const today = new Date(fromDate);
     today.setHours(0, 0, 0, 0);
@@ -272,9 +264,7 @@ export class ICSParser {
     return futureEvents.length > 0 ? futureEvents[0] : null;
   }
   
-  /**
-   * Findet Events in einem Datumsbereich
-   */
+  /** Findet Events in einem Datumsbereich */
   static findEventsInRange(events: ChurchEvent[], startDate: Date, endDate: Date): ChurchEvent[] {
     const start = new Date(startDate);
     start.setHours(0, 0, 0, 0);
@@ -288,9 +278,7 @@ export class ICSParser {
     });
   }
   
-  /**
-   * Gruppiert Events nach liturgischen Zeiten
-   */
+  /** Gruppiert Events nach liturgischen Zeiten */
   static groupEventsBySeason(events: ChurchEvent[]): { [season: string]: ChurchEvent[] } {
     const grouped: { [season: string]: ChurchEvent[] } = {};
     
@@ -305,9 +293,6 @@ export class ICSParser {
     return grouped;
   }
   
-  /**
-   * Formatiert Datum für Anzeige
-   */
   static formatDate(date: Date): string {
     return date.toLocaleDateString('de-DE', {
       weekday: 'long',
@@ -317,9 +302,7 @@ export class ICSParser {
     });
   }
   
-  /**
-   * Bestimmt Farbe für liturgische Farbe
-   */
+  /** Bestimmt Farbe für liturgische Farbe */
   static getLiturgicalColorClass(color?: string): string {
     if (!color) return 'bg-gray-100 text-gray-800';
     

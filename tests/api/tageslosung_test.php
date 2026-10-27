@@ -1,7 +1,5 @@
 <?php
-// Prüft den öffentlichen Endpunkt der Tageslosung: Eingaben, Whitelist,
-// Zwischenspeicher, Begrenzung, Kopfzeilen und dass er keine Bibelquelle abfragt.
-// Aufruf: php tests/api/tageslosung_test.php
+// Öffentlicher Tageslosung-Endpunkt, auch dass er keine Bibelquelle abfragt. Aufruf: php tests/api/tageslosung_test.php
 
 require_once __DIR__ . '/../../api/lib/tageslosung.php';
 

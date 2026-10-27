@@ -1,8 +1,5 @@
 <?php
-/**
- * Church Events API
- * Returns liturgical events from database
- */
+/** Liturgische Termine aus der Datenbank. */
 
 require_once 'database.php';
 require_once 'auth.php';

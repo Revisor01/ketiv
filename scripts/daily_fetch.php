@@ -1,12 +1,6 @@
 #!/usr/bin/env php
 <?php
-/**
- * Täglicher Fetch-Job für alle Übersetzungen
- * Lädt alle verfügbaren Übersetzungen und speichert sie in der Datenbank
- * 
- * Verwendung: php daily_fetch.php [YYYY-MM-DD]
- * Ohne Datum wird das heutige Datum verwendet
- */
+/** Lädt alle Übersetzungen eines Tages in die DB. Aufruf: php daily_fetch.php [YYYY-MM-DD] */
 
 require_once '/var/www/html/database.php';
 
@@ -34,9 +28,6 @@ class DailyFetcher {
         $this->db = new LosungenDatabase();
     }
     
-    /**
-     * Führe täglichen Fetch aus
-     */
     public function fetchDaily($date = null) {
         if (!$date) {
             $date = date('Y-m-d');
