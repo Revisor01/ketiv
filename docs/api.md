@@ -7,41 +7,18 @@ Beispiele verwenden `https://api.example.com` als Platzhalter für die eigene In
 
 `GET /api/v1/tageslosung?translation=LUT` liefert die Tageslosung ohne
 API-Schlüssel, für Websites und das Widget `/widget.js`. Beschreibung als
-OpenAPI 3.1 in [openapi.yaml](openapi.yaml), Einbindung im README unter
-„Tageslosung einbinden“. Alles Folgende betrifft die Schlüssel-API.
+OpenAPI 3.1 in [openapi.yaml](openapi.yaml), Einbindung in
+[widget.md](widget.md). Alles Folgende betrifft die Schlüssel-API.
 
 ## Anmeldung
 
-Die API verwendet API-Key basierte Authentifizierung für sicheren Zugriff.
+Der API-Schlüssel geht im Header `X-API-Key` oder als Parameter `api_key` mit;
+bis zu drei Schlüssel lassen sich konfigurieren.
 
-### Authentifizierungsmethoden
-
-**Option 1: HTTP Header (Empfohlen)**
 ```bash
 curl -H "X-API-Key: your-api-key" "https://api.example.com/"
-```
-
-**Option 2: Query Parameter**
-```bash
 curl "https://api.example.com/?api_key=your-api-key"
 ```
-
-**Option 3: JavaScript/Fetch**
-```javascript
-fetch('https://api.example.com/?translation=HFA', {
-  headers: {
-    'X-API-Key': 'your-api-key'
-  }
-})
-.then(response => response.json())
-.then(data => console.log(data));
-```
-
-### API-Key Management
-
-- **Mehrere Keys**: Bis zu 3 verschiedene API-Keys werden unterstützt
-- **Umgebungsvariablen**: Keys werden sicher über `.env` verwaltet
-- **Rotation**: Keys können ohne Service-Unterbrechung gewechselt werden
 
 ## Endpunkte
 
@@ -55,23 +32,10 @@ Lädt die aktuelle Tageslosung in der gewünschten Übersetzung.
 | `translation` | string | `LUT` | Bibelübersetzung (siehe [Verfügbare Übersetzungen](#verfügbare-übersetzungen)) |
 | `api_key` | string | - | API-Key (alternativ zu Header) |
 
-**Beispiele:**
+**Beispiel:**
 
 ```bash
-# Deutsche Übersetzungen
-curl -H "X-API-Key: your-key" "https://api.example.com/?translation=HFA"   # Hoffnung für alle
-curl -H "X-API-Key: your-key" "https://api.example.com/?translation=ELB"   # Elberfelder
-curl -H "X-API-Key: your-key" "https://api.example.com/?translation=NGÜ"   # Neue Genfer
-
-# Englische Übersetzungen  
-curl -H "X-API-Key: your-key" "https://api.example.com/?translation=NIV"   # New International Version
-curl -H "X-API-Key: your-key" "https://api.example.com/?translation=ESV"   # English Standard Version
-
-# Französische Übersetzungen
-curl -H "X-API-Key: your-key" "https://api.example.com/?translation=LSG"   # Louis Segond 1910
-
-# Standard (ohne Parameter = Lutherbibel)
-curl -H "X-API-Key: your-key" "https://api.example.com/"
+curl -H "X-API-Key: your-key" "https://api.example.com/?translation=HFA"
 ```
 
 ### Weitere Endpunkte
@@ -89,18 +53,18 @@ Tageslosung (`/`) und Bibelstellensuche verlangen einen API-Schlüssel; `sunday.
 
 ### Deutsche Übersetzungen (alle geprüft)
 
-| Code | Name | Beschreibung |
-|------|------|--------------|
-| `LUT` | **Lutherbibel 2017** | Standard-Übersetzung (Default) |
-| `ELB` | **Elberfelder Bibel** | Wortgetreue Übersetzung |
-| `HFA` | **Hoffnung für alle** | Moderne, verständliche Sprache |
-| `SLT` | **Schlachter 2000** | Konservative Übersetzung |
-| `ZB` | **Zürcher Bibel** | Reformierte Tradition |
-| `GNB` | **Gute Nachricht Bibel 2018** | Einfache, klare Sprache |
-| `NGÜ` | **Neue Genfer Übersetzung** | Ausgewogene Übersetzung |
-| `EU` | **Einheitsübersetzung 2016** | Katholische Übersetzung |
-| `NLB` | **Neues Leben. Die Bibel** | Lebensnahe Sprache |
-| `NeÜ` | **Neue evangelistische Übersetzung** | Poetische Übersetzung |
+| Code | Name |
+|------|------|
+| `LUT` | **Lutherbibel 2017** (Standard) |
+| `ELB` | **Elberfelder Bibel** |
+| `HFA` | **Hoffnung für alle** |
+| `SLT` | **Schlachter 2000** |
+| `ZB` | **Zürcher Bibel** |
+| `GNB` | **Gute Nachricht Bibel 2018** |
+| `NGÜ` | **Neue Genfer Übersetzung** |
+| `EU` | **Einheitsübersetzung 2016** |
+| `NLB` | **Neues Leben. Die Bibel** |
+| `NeÜ` | **Neue evangelistische Übersetzung** |
 
 ### Fremdsprachige Übersetzungen
 
@@ -204,11 +168,6 @@ Tageslosung (`/`) und Bibelstellensuche verlangen einen API-Schlüssel; `sunday.
 }
 ```
 
-**Lösungen:**
-- API-Key über `X-API-Key` Header senden
-- API-Key als `api_key` Parameter übergeben
-- Gültigen API-Key aus `.env` verwenden
-
 ### 500 Internal Server Error - Technischer Fehler
 ```json
 {
@@ -217,12 +176,6 @@ Tageslosung (`/`) und Bibelstellensuche verlangen einen API-Schlüssel; `sunday.
   "timestamp": "2025-07-31T10:30:00+02:00"
 }
 ```
-
-**Häufige Ursachen:**
-- Losungen.de nicht erreichbar
-- ERF Bibleserver Timeout
-- Docker Container nicht gestartet
-- Netzwerk-Probleme
 
 ### Ungültige Übersetzung
 ```json
