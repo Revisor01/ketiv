@@ -16,6 +16,7 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   galten in diesem Fall feste Ersatzschlüssel, die im Quelltext standen.
 - Die Anmeldung prüft jetzt der Server. Bisher standen Passwort und
   Zugangsschlüssel in der ausgelieferten Webseite und waren dort lesbar.
+- Ein Werkzeug, mit dem das Stylesheet gebaut wird, auf eine Version ohne bekannte Sicherheitslücke angehoben. Das ausgelieferte Stylesheet ist unverändert.
 
 ### Behoben
 - Die tägliche Losung wurde nicht mehr angezeigt: die Anwendung meldete sich mit
