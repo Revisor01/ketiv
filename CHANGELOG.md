@@ -94,7 +94,7 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [2.2.0] - 2026-08-01
 
-### Changed
+### Geändert
 - Das Projekt heißt jetzt durchgängig **Ketiv** („was geschrieben steht") statt
   „BibleScraper Pro": Titel, Header, Login, PWA-Metadaten, GitHub-Repository
   (`Revisor01/ketiv`), Container-Images (`ghcr.io/revisor01/ketiv-api`,
@@ -106,13 +106,13 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - `docker-compose.portainer.yml` entspricht wieder dem tatsächlichen
   Produktionsstand (Bind-Mounts statt benannter Volumes, Traefik-Labels).
 
-### Fixed
+### Behoben
 - API-Aufrufe auf der Wurzel (`/?api_key=…`) landeten nach der Traefik-Umstellung
   beim Frontend und lieferten HTML statt JSON. Eigener Router mit
   `QueryRegexp(api_key, .+)` und höherer Priorität — `Query(api_key)` allein
   matcht nur leere Werte.
 
-### Added
+### Hinzugefügt
 - Nutzungsbedingungen der Herrnhuter Brüdergemeine als
   `docs/NUTZUNGSBEDINGUNGEN-Losungen-2023.pdf` im Repository.
 - README: Abschnitt „Rechtliches" mit den Auflagen für eine Veröffentlichung
@@ -120,48 +120,48 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [2.1.0] - 2026-07-31
 
-### Security
+### Sicherheit
 - API-Key und Admin-Zugangsdaten aus dem Quellcode entfernt — sie kommen jetzt
   ausschließlich aus Umgebungsvariablen (`REACT_APP_API_KEY`,
   `REACT_APP_AUTH_USER`, `REACT_APP_AUTH_PASSWORD`) bzw. CI-Secrets.
 - Hartkodierte Fallback-API-Keys in `api/auth.php` und `api/admin.php` entfernt.
   Ohne gesetztes `API_KEY_1` wird jeder Zugriff jetzt abgelehnt, statt auf einen
   im Repo stehenden Schlüssel zurückzufallen.
-- Git-History auf einen Initial Commit zusammengefasst, um zuvor eingecheckte
+- Git-Historie auf einen einzigen Anfangs-Commit zusammengefasst, um zuvor eingecheckte
   Zugangsdaten aus dem öffentlichen Repository zu entfernen.
-- Dependabot Alerts, Dependabot Security Updates und CodeQL Default Setup aktiviert.
-- Source Maps werden nicht mehr ausgeliefert (`GENERATE_SOURCEMAP=false`) und sind
+- Automatische Warnungen und Updates bei Sicherheitslücken in Abhängigkeiten sowie die Code-Analyse von GitHub aktiviert.
+- Quelltext-Zuordnungsdateien (Source Maps) werden nicht mehr ausgeliefert (`GENERATE_SOURCEMAP=false`) und sind
   über `.gitignore` ausgeschlossen.
 
-### Changed
+### Geändert
 - Die Landingpage der API (`public/`) wird nicht mehr als Build-Artefakt eingecheckt,
   sondern im CI-Workflow aus `frontend/` gebaut. Sie bleibt damit automatisch aktuell —
   zuvor lag dort ein manuell kopierter Stand von August 2025.
 - `frontend/Dockerfile` nimmt die Build-Konfiguration über `ARG`/`ENV` entgegen,
   damit die Werte im CI-Build ankommen.
 
-### Removed
+### Entfernt
 - Verwaiste Dateien im Projektwurzelverzeichnis entfernt: `bigs slugs.txt`,
   `scrape_exegesis.py`, `Losungen Free 2026.csv/.txt` (bereits nach
   `sql/losungen_2026.sql` überführt), `NUTZUNGSBEDINGUNGEN November 2023.pdf`.
 
-### Fixed
+### Behoben
 - Verklebten `.gitignore`-Eintrag korrigiert (`pnpm-lock.yaml.playwright-mcp/`),
   wodurch Playwright-Artefakte nicht ignoriert wurden.
 
 ## [2.0.0] - 2026-07-30
 
-### Added
+### Hinzugefügt
 - Kopierfunktion mit hochgestellten Versnummern (Unicode für Text/Markdown,
   `<sup>` für HTML).
 
-### Changed
+### Geändert
 - Reduktion auf die Kernfunktionen: CMS und Newsletter-System entfernt.
   Es bleiben Losung, Bibelsuche und Kirchenjahr.
 - UI-Überarbeitung: Kirchenjahr-Navigation per Dropdown, Verbesserungen im
   Übersetzungsvergleich, diverse Korrekturen im Admin-Bereich.
 
-### Fixed
+### Behoben
 - Übersetzungs-Dropdown wurde von benachbarten Karten verdeckt (Stacking Context).
 - Darstellung von Einzelversen.
 - Pfad zum Cron-Status im Container.
@@ -169,20 +169,20 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [1.1.0] - 2026-01
 
-### Added
+### Hinzugefügt
 - Losungen-Daten für 2026.
 - CI/CD-Workflows: automatische Docker-Builds nach GHCR mit Portainer-Webhook.
 - `sunday.php` mit dynamischer Perikopenreihen-Berechnung als Endpunkt für n8n.
 - Newsletter-System mit Double-Opt-In (in 2.0.0 wieder entfernt).
 
-### Fixed
+### Behoben
 - Parsing komplexer Bibelstellen in `sunday.php` (z. B. `Jer 14,1(2)3-4(5-6)7-9`).
 - Diverse Null-Checks im Admin-Panel (Datenbankstatus, Speicherplatz).
 - Routing für `church_events.php` und weitere Endpunkte in der `.htaccess`.
 
 ## [1.0.0] - 2025-08
 
-### Added
+### Hinzugefügt
 - Erste Fassung der Losungen-API mit Web-Interface.
 - Bibelsuche über ERF Bibleserver mit über 20 Übersetzungen.
 - Admin-Panel mit Cache-Verwaltung und manuellem Abruf.
@@ -191,7 +191,7 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Unterstützung komplexer Versbereiche inklusive ausgeschlossener Verse
   (z. B. `Joh 8,8-12.14-17`).
 
-Die Einträge vor 2.1.0 sind aus der ursprünglichen Git-History rekonstruiert.
+Die Einträge vor 2.1.0 sind aus der ursprünglichen Git-Historie rekonstruiert.
 Da diese beim Zusammenfassen entfernt wurde, gibt es für sie keine Tags.
 
 [Unreleased]: https://github.com/Revisor01/ketiv/compare/v2.4.0...HEAD
