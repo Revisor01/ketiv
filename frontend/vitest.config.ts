@@ -9,8 +9,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/setupTests.ts',
     css: true,
-    // Ab Node 25 gibt es ein eigenes localStorage, das ohne Speicherdatei
-    // undefined liefert und das von jsdom verdeckt.
+    // Ab Node 25 verdeckt ein eigenes localStorage ohne Speicherdatei das von jsdom.
     execArgv: ['--no-experimental-webstorage'],
   },
 });

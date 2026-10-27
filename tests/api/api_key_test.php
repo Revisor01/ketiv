@@ -1,6 +1,5 @@
 <?php
-// Prüft, dass nur konfigurierte API-Schlüssel gelten und es keine Ersatzschlüssel gibt.
-// Aufruf: php tests/api/api_key_test.php
+// Nur konfigurierte API-Schlüssel gelten. Aufruf: php tests/api/api_key_test.php
 
 require_once __DIR__ . '/../../api/auth.php';
 

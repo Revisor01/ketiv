@@ -78,17 +78,7 @@ export class BibleReferenceParser {
     'dan': 'Daniel', 'daniel': 'Daniel',
   };
 
-  /**
-   * Parst verschiedene Bibelstellen-Formate
-   * Unterstützte Formate:
-   * - Johannes 3,16
-   * - Joh 3,16-18  
-   * - Joh. 3, 16 - 18
-   * - 1. Joh 1, 2-12
-   * - 1Johannes 1,2-3
-   * - 2. Mose 16,2-3.11-18 (verse ranges with gaps)
-   * - Mt 21,1–11 (with em dash)
-   */
+  /** Parst z. B. "Joh 3,16-18", "1. Joh 1, 2-12", "2. Mose 16,2-3.11-18", "Mt 21,1–11". */
   static parse(input: string): ParsedReference | null {
     if (!input || typeof input !== 'string') {
       return null;
@@ -141,11 +131,7 @@ export class BibleReferenceParser {
       }
     }
     
-    // Regex für verschiedene Formate
-    // Gruppe 1: Buch (mit optionaler Nummer und Punkt)
-    // Gruppe 2: Kapitel  
-    // Gruppe 3: Vers-Start
-    // Gruppe 4: Optionaler Vers-Ende (nach - oder bis)
+    // Gruppen: Buch, Kapitel, Vers-Start, optionales Vers-Ende.
     const patterns = [
       // "Johannes 3,16" oder "Joh 3,16-18"  
       /^([1-3]?\.?\s*[a-züäöß]+\.?)\s+(\d+)[,\.]\s*(\d+)(?:\s*[-–bis]\s*(\d+))?/i,
@@ -200,9 +186,7 @@ export class BibleReferenceParser {
     return null;
   }
 
-  /**
-   * Normalisiert Buchnamen zu Standardform
-   */
+  /** Normalisiert Buchnamen zu Standardform */
   private static normalizeBook(bookInput: string): string | null {
     const cleaned = bookInput.toLowerCase()
       .replace(/\s+/g, '') // Leerzeichen entfernen
@@ -226,17 +210,12 @@ export class BibleReferenceParser {
       .join(' ');
   }
 
-  /**
-   * Validiert eine Bibelstellenreferenz
-   */
+  /** Validiert eine Bibelstellenreferenz */
   static validate(reference: string): boolean {
     const parsed = this.parse(reference);
     return parsed !== null;
   }
 
-  /**
-   * Gibt Beispiele für unterstützte Formate zurück
-   */
   static getExamples(): string[] {
     return [
       'Johannes 3,16',
@@ -252,9 +231,7 @@ export class BibleReferenceParser {
     ];
   }
 
-  /**
-   * Autocomplete-Vorschläge für Buchtyping
-   */
+  /** Autocomplete-Vorschläge für Buchtyping */
   static getSuggestions(partial: string): string[] {
     if (!partial || partial.length < 2) {
       return [];

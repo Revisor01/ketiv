@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Die App liest ihre Konfiguration weiterhin aus REACT_APP_*-Variablen.
-// envPrefix sorgt dafür, dass Vite genau diese Variablen einbindet.
+// envPrefix, weil die App ihre Konfiguration aus REACT_APP_*-Variablen liest.
 export default defineConfig({
   plugins: [react()],
   envPrefix: 'REACT_APP_',

@@ -1,14 +1,5 @@
 <?php
-/**
- * Jahresimport der Herrnhuter Losungen
- *
- * Liest das offizielle XML-Paket von losungen.de (oder eine lokale Datei)
- * und schreibt die Tageslosungen in die Tabelle `losungen`.
- *
- * Aufruf:
- *   php import_losungen.php 2027                    # Download von losungen.de
- *   php import_losungen.php 2027 /pfad/datei.zip    # lokale ZIP oder XML
- */
+/** Jahresimport der Losungen aus dem XML von losungen.de. Aufruf: php import_losungen.php 2027 [datei.zip|datei.xml] */
 
 // Im Container liegt database.php unter /var/www/html, lokal unter api/
 if (file_exists('/var/www/html/database.php')) {
@@ -29,9 +20,7 @@ class LosungenImporter {
         $this->pdo = $connect->invoke($this->db);
     }
 
-    /**
-     * Holt das XML für ein Jahr: aus lokaler Datei oder von losungen.de
-     */
+    /** Holt das XML für ein Jahr: aus lokaler Datei oder von losungen.de */
     private function loadXml($year, $localPath = null) {
         if ($localPath) {
             if (!file_exists($localPath)) {
@@ -43,8 +32,7 @@ class LosungenImporter {
             $url = "https://www.losungen.de/fileadmin/media-losungen/download/Losung_{$year}_XML.zip";
             echo "🌐 Lade {$url}\n";
 
-            // losungen.de liefert eine unvollstaendige Zertifikatskette aus,
-            // deshalb ohne Peer-Verifikation. Rein privates Projekt.
+            // losungen.de liefert eine unvollständige Zertifikatskette aus, daher ohne Peer-Verifikation.
             $context = stream_context_create([
                 'ssl' => ['verify_peer' => false, 'verify_peer_name' => false],
                 'http' => ['user_agent' => 'LosungenAPI/1.0', 'timeout' => 60]
@@ -76,9 +64,6 @@ class LosungenImporter {
         return $xmlContent;
     }
 
-    /**
-     * ZIP-Extraktion über die PHP-Erweiterung
-     */
     private function extractWithZipArchive($path) {
         $zip = new ZipArchive();
         if ($zip->open($path) !== true) {
@@ -99,9 +84,7 @@ class LosungenImporter {
         return $xmlContent;
     }
 
-    /**
-     * ZIP-Extraktion über das unzip-Binary (ext-zip ist im Image nicht vorhanden)
-     */
+    /** unzip-Binary, weil ext-zip im Image fehlt. */
     private function extractWithUnzip($path) {
         $list = shell_exec('unzip -Z1 ' . escapeshellarg($path) . ' 2>/dev/null');
         if (!$list) {
@@ -118,9 +101,7 @@ class LosungenImporter {
         return null;
     }
 
-    /**
-     * Importiert ein Jahr, bestehende Einträge werden aktualisiert
-     */
+    /** Importiert ein Jahr, bestehende Einträge werden aktualisiert */
     public function import($year, $localPath = null) {
         $xmlContent = $this->loadXml($year, $localPath);
 

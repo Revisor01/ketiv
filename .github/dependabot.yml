@@ -1,5 +1,4 @@
-# Haelt die gepinnten Actions, die npm-Pakete des Frontends und die
-# Docker-Basisimages aktuell; je Oekosystem ein gesammelter PR pro Woche.
+# Je Ökosystem ein gesammelter PR pro Woche.
 version: 2
 updates:
   - package-ecosystem: github-actions

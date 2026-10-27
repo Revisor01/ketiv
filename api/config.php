@@ -1,8 +1,5 @@
 <?php
-/**
- * Database Configuration für Losungen API
- * PDO Connection für PostgreSQL
- */
+/** PDO-Verbindung zu PostgreSQL. */
 
 // Database connection parameters
 $host = $_ENV['DB_HOST'] ?? 'localhost';

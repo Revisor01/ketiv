@@ -1,8 +1,5 @@
 <?php
-/**
- * Bible Search API - Erweiterte Bibeltext-Suche
- * Unterstützt Einzelverse, Versbereiche und verschiedene Übersetzungen
- */
+/** Bibeltext-Suche über Einzelverse, Versbereiche und Übersetzungen. */
 
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
@@ -17,9 +14,6 @@ require_once 'auth.php';
 require_once 'database.php';
 require_once 'redis_cache.php';
 
-/**
- * Testament-Erkennung basierend auf Buchnamen
- */
 function detectTestament($bookName) {
     $ntBooks = [
         'matthäus', 'mt', 'markus', 'mk', 'lukas', 'lk', 'johannes', 'joh',
@@ -82,9 +76,6 @@ class BibleSearchAPI {
         $this->cache = new RedisCache();
     }
     
-    /**
-     * Hauptsuchfunktion für Bibeltexte
-     */
     public function searchBibleText($reference, $translation = 'LUT', $format = 'json') {
         try {
             // Parameter validieren
@@ -193,9 +184,6 @@ class BibleSearchAPI {
         }
     }
     
-    /**
-     * Parse Bibelstellen-Referenz mit DB-Abkürzungen
-     */
     private function parseReference($reference) {
         $originalReference = $reference;
 
@@ -250,8 +238,7 @@ class BibleSearchAPI {
             ];
         }
 
-        // 2. Tokenizer: Zerlege den Vers-String in seine Bestandteile
-        // Verbessertes Regex: Unterstützt verschiedene Bindestrich-Arten (-, –, —)
+        // Tokenizer; erlaubt die Bindestriche -, – und —.
         $tokenRegex = '/(?<paren>[\(\)])|(?<range>(\d+)([a-z])?(?:[\-–—](\d+)([a-z])?)?)|(?<sep>[\.,;])/u';
         preg_match_all($tokenRegex, $verseStr, $tokens, PREG_SET_ORDER | PREG_UNMATCHED_AS_NULL);
 
@@ -319,7 +306,7 @@ class BibleSearchAPI {
         sort($allVerseNumbers);
         $allVerseNumbers = array_unique($allVerseNumbers);
         
-        // NEU: Bei Suffix 'a' automatisch 'b' als ausgeschlossen hinzufügen (Problem 3)
+        // Bei Suffix 'a' gilt 'b' als ausgeschlossen.
         $implicitExcludedSuffixes = [];
         $allSuffixes = array_merge($suffixes, $optionalSuffixes);
         foreach ($allSuffixes as $verseNum => $suffix) {
@@ -358,7 +345,7 @@ class BibleSearchAPI {
             'chapter' => $chapter,
             'start_verse' => !empty($allVerseNumbers) ? min($allVerseNumbers) : 0,
             'end_verse' => !empty($allVerseNumbers) ? max($allVerseNumbers) : 0,
-            'all_verses' => array_values($allVerses), // NEU: Explizit normale Verse
+            'all_verses' => array_values($allVerses),
             'excluded_verses' => array_values($excludedVerses),
             'optional_verses' => array_values(array_unique($optionalVerses)),
             'suffixes' => $suffixes,
@@ -369,9 +356,7 @@ class BibleSearchAPI {
         ];
     }
     
-    /**
-     * Löse Buchabkürzung über Datenbank auf und gebe auch Testament zurück
-     */
+    /** Löse Buchabkürzung über Datenbank auf und gebe auch Testament zurück */
     private function resolveBookAbbreviation($bookInput) {
         try {
             $pdo = getDatabase();
@@ -399,9 +384,6 @@ class BibleSearchAPI {
         }
     }
     
-    /**
-     * Suche im Cache (translation_cache Tabelle)
-     */
     private function searchInCache($parsedRef, $translation) {
         // Nur für heutige Losungen verfügbar
         $today = date('Y-m-d');
@@ -451,9 +433,6 @@ class BibleSearchAPI {
         return null;
     }
     
-    /**
-     * Live-Scraping ausführen
-     */
     private function scrapeReference($parsedRef, $translation) {
         $pythonScript = '/var/www/html/bible_scraper.py';
         
@@ -461,12 +440,8 @@ class BibleSearchAPI {
             throw new Exception('Bible scraper not found');
         }
         
-        // NEU: Logik zur Auswahl der Scraping-Methode korrigiert
-        // scrapeComplexReference ist robuster und kann sowohl ausgeschlossene als auch optionale Verse verarbeiten.
-        // Wir leiten alle komplexen Fälle an diese Funktion weiter.
+        // Alle komplexen Fälle über scrapeComplexReference, nur sie behandelt ausgeschlossene und optionale Verse.
         if (!empty($parsedRef['excluded_verses']) || !empty($parsedRef['optional_verses']) || !empty($parsedRef['suffixes']) || !empty($parsedRef['optional_suffixes']) || !empty($parsedRef['implicit_excluded_suffixes'])) {
-            // Diese Funktion wird nun für alle komplexen Fälle verwendet.
-            // Sie ist angepasst, damit sie auch optionale Verse korrekt verarbeitet.
             return $this->scrapeComplexReference($parsedRef, $translation);
         }
         
@@ -513,9 +488,6 @@ class BibleSearchAPI {
         return $data;
     }
     
-    /**
-     * Verarbeite Referenzen mit optionalen Versen in Klammern
-     */
     private function scrapeOptionalReference($parsedRef, $translation) {
         $book = $parsedRef['book'];
         $chapter = $parsedRef['chapter'];
@@ -527,8 +499,6 @@ class BibleSearchAPI {
         // Hole die korrekten Verse-Listen aus parseReference
         $excludedVerses = $parsedRef['excluded_verses'] ?? [];
         
-        // parseReference hat bereits die korrekte Berechnung gemacht
-        // Wir müssen nur die normalen Verse (ohne ausgeschlossene) und optionalen Verse kombinieren
         $normalVerses = [];
         for ($v = $parsedRef['start_verse']; $v <= $parsedRef['end_verse']; $v++) {
             if (!in_array($v, $excludedVerses)) {
@@ -572,8 +542,7 @@ class BibleSearchAPI {
             foreach ($data['verses'] as $verse) {
                 $verseNum = $verse['number'];
                 
-                // Prüfe ob dieser Vers gewünscht ist (normal oder optional)
-                // WICHTIG: Normale Verse haben Priorität über optionale
+                // Normale Verse haben Vorrang vor optionalen.
                 $isNormallyIncluded = in_array($verseNum, $allNeededVerses);
                 $isOptional = in_array($verseNum, $optionalVerses) && !$isNormallyIncluded;  // Nur optional wenn nicht normal
                 $isExcluded = in_array($verseNum, $excludedVerses);
@@ -610,13 +579,7 @@ class BibleSearchAPI {
         return $data;
     }
     
-    /**
-     * Verarbeite komplexe Referenzen mit ausgeschlossenen und/oder optionalen Versen.
-     * Diese Methode ist robuster, da sie die Referenz in kleinere Teile zerlegt und einzeln anfragt.
-     */
-    /**
-     * KORRIGIERTE VERSION: Verarbeite komplexe Referenzen mit ausgeschlossenen und/oder optionalen Versen.
-     */
+    /** Zerlegt die Referenz in Teile und fragt sie einzeln an, damit ausgeschlossene und optionale Verse stimmen. */
     private function scrapeComplexReference($parsedRef, $translation) {
         $book = $parsedRef['book'];
         $chapter = $parsedRef['chapter'];
@@ -652,11 +615,9 @@ class BibleSearchAPI {
             $isExcluded = in_array($verseNum, $parsedRef['excluded_verses']);
             $isNormal = in_array($verseNum, $parsedRef['all_verses']);
             
-            // NEU: Prüfe ob dieser Vers Suffixe hat
             $hasSuffix = isset($parsedRef['suffixes'][$verseNum]) || (isset($parsedRef['optional_suffixes'][$verseNum]) && $isOptional);
             
-            // WICHTIG: Wenn ein Vers Suffixe hat, wird er NUR über die Suffix-Logik behandelt
-            // Das verhindert doppelte Einträge bei z.B. "Mk 1,8b-10"
+            // Verse mit Suffix nur über die Suffix-Logik, sonst doppelte Einträge bei z. B. "Mk 1,8b-10".
 
             // Scrape den einzelnen Vers
             $simpleRef = "$book $chapter,$verseNum";
@@ -689,7 +650,7 @@ class BibleSearchAPI {
                     ? $parsedRef['suffixes'][$verseNum] 
                     : $parsedRef['optional_suffixes'][$verseNum];
                 
-                // NEUE LOGIK: Bestimme Status für beide Suffixe separat
+                // Status für beide Suffixe getrennt.
                 $normalSuffix = $parsedRef['suffixes'][$verseNum] ?? null;
                 $optionalSuffix = $parsedRef['optional_suffixes'][$verseNum] ?? null;
                 
@@ -754,10 +715,7 @@ class BibleSearchAPI {
         ];
     }
     
-    /**
-     * NEU: Spaltet einen Vers-Text in Teil a und Teil b.
-     * @return array ['partA' => string, 'partB' => string]
-     */
+    /** Spaltet einen Vers in Teil a und b. */
     private function splitVerseText($text) {
         // Finde das erste Satzende (.!?;)
         if (preg_match('/[.?!;]/', $text, $matches, PREG_OFFSET_CAPTURE)) {
@@ -795,9 +753,6 @@ class BibleSearchAPI {
         return ['partA' => $text, 'partB' => ''];
     }
     
-    /**
-     * Berechne Vers-Bereiche ohne ausgeschlossene Verse
-     */
     private function calculateVerseRanges($startVerse, $endVerse, $excludedVerses) {
         $ranges = [];
         $current = $startVerse;
@@ -823,9 +778,7 @@ class BibleSearchAPI {
         return $ranges;
     }
     
-    /**
-     * Normalisiere Referenz für Python-Scraper (füge Leerzeichen zwischen Buch und Kapitel hinzu)
-     */
+    /** Der Python-Scraper erwartet ein Leerzeichen zwischen Buch und Kapitel. */
     private function normalizeReferenceForScraper($parsedRef) {
         $book = $parsedRef['book'];
         $chapter = $parsedRef['chapter'];
@@ -841,9 +794,7 @@ class BibleSearchAPI {
         return $normalized;
     }
     
-    /**
-     * Generiere korrekte Bibleserver-URL (PHP-Port der Python-Funktion)
-     */
+    /** PHP-Port der gleichnamigen Python-Funktion. */
     private function generateBibleserverUrl($reference, $translation, $parsedRef = null) {
         // Spezialbehandlung für BIGS
         if ($translation === 'BIGS') {
@@ -876,9 +827,6 @@ class BibleSearchAPI {
         return "https://www.bibleserver.com/$translation/$book_normalized$verse_part";
     }
     
-    /**
-     * Normalisiert Buchname für ERF Bibleserver URLs
-     */
     private function normalizeBibleserverBookName($book) {
         $book_mappings = [
             // Altes Testament
@@ -953,9 +901,6 @@ class BibleSearchAPI {
         return $book_mappings[$book] ?? $book;
     }
     
-    /**
-     * Generiere BIGS-URL - NEU: Mit Parse-Daten für komplexe Referenzen
-     */
     private function generateBigsUrl($reference, $parsedRef = null) {
         // Verwende Parse-Daten wenn verfügbar (für komplexe Referenzen)
         if ($parsedRef) {
@@ -1002,7 +947,6 @@ class BibleSearchAPI {
         
         $book_abbrev = $book_mappings[$book] ?? $book;
         
-        // NEU: Min-Max Format wie User gewünscht
         if ($verse_start != $verse_end) {
             return "https://www.bibel-in-gerechter-sprache.de/die-bibel/bigs-online/?$book_abbrev/$chapter/$verse_start-$verse_end";
         } else {
@@ -1010,9 +954,6 @@ class BibleSearchAPI {
         }
     }
 
-    /**
-     * Get translation name from code
-     */
     private function getTranslationName($code) {
         $translations = [
             'LUT' => 'Lutherbibel 2017',
@@ -1035,9 +976,6 @@ class BibleSearchAPI {
         return $translations[$code] ?? $code;
     }
     
-    /**
-     * Vergleiche zwei Referenzen
-     */
     private function referencesMatch($ref1, $ref2) {
         if (!$ref1 || !$ref2) return false;
         
@@ -1047,9 +985,6 @@ class BibleSearchAPI {
                $ref1['end_verse'] === $ref2['end_verse'];
     }
     
-    /**
-     * Formatiere Ergebnis je nach gewünschtem Format
-     */
     private function formatResult($result, $format) {
         switch ($format) {
             case 'text':

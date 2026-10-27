@@ -1,5 +1,4 @@
--- PostgreSQL Schema für Kirchenjahr, Perikopen, Losungen und Bibel-Abkürzungen
--- (Gottesdienst-CMS-Tabellen wurden 2026-07 entfernt)
+-- PostgreSQL-Schema für Kirchenjahr, Perikopen, Losungen und Bibel-Abkürzungen.
 
 -- Perikopen-Tabelle (Kirchenjahr-Ereignisse)
 CREATE TABLE IF NOT EXISTS perikopes (
@@ -21,8 +20,7 @@ CREATE TABLE IF NOT EXISTS perikopes (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Trigger-Funktion für updated_at (Name aus historischen Gründen beibehalten,
--- wird von bestehenden Triggern in der Produktions-DB referenziert)
+-- Name bleibt, weil bestehende Trigger in der Produktions-DB ihn referenzieren.
 CREATE OR REPLACE FUNCTION update_services_updated_at_column()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -90,6 +88,3 @@ COMMENT ON TABLE church_events IS 'Kirchenjahr-Ereignisse und Feiertage';
 COMMENT ON TABLE bible_abbreviations IS 'Bibelbuch-Abkürzungen für Referenz-Parsing';
 COMMENT ON TABLE losungen IS 'Herrnhuter Losungen Tagesinhalte';
 
--- Optionales Aufräum-Skript für bestehende Datenbanken (manuell ausführen):
--- DROP TABLE IF EXISTS service_tags, service_components, services CASCADE;
--- DROP TABLE IF EXISTS newsletter_send_log, newsletter_preferences, newsletter_subscribers CASCADE;

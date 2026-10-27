@@ -151,18 +151,14 @@ export const ChurchYearCalendar: React.FC = () => {
     });
   };
 
-  // Berechne aktuelle Perikopenreihe basierend auf Kirchenjahr
-  // Reihe I: 2024/25, Reihe II: 2025/26, Reihe III: 2026/27, etc.
   const getCurrentPerikopenreihe = (date: Date): { reihe: string; kirchenjahr: string } => {
     const year = date.getFullYear();
     const month = date.getMonth(); // 0-11
 
-    // Kirchenjahr beginnt am 1. Advent (ca. Ende November)
-    // Vereinfacht: Vor Dezember = vorheriges Kirchenjahr
+    // Vereinfacht: vor Dezember gilt das vorherige Kirchenjahr.
     const kirchenjahrStart = month >= 11 ? year : year - 1;
 
-    // Reihe I startete 2018/19, dann rotiert es alle 6 Jahre
-    // 2018/19 = I, 2019/20 = II, ..., 2024/25 = I, 2025/26 = II, 2026/27 = III
+    // Reihe I begann 2018/19, die Reihen rotieren alle sechs Jahre.
     const reihenNummern = ['I', 'II', 'III', 'IV', 'V', 'VI'];
     const jahresSeit2018 = kirchenjahrStart - 2018;
     const reiheIndex = ((jahresSeit2018 % 6) + 6) % 6; // Modulo auch für negative Zahlen

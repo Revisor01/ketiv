@@ -18,8 +18,7 @@ function validateApiKey() {
     return false;
 }
 
-// Der Admin-Login prüft am Server, damit keine Zugangsdaten ins Frontend-Bundle gelangen.
-// Ohne gesetzte Variablen meldet sich niemand an.
+// Login wird am Server geprüft, damit keine Zugangsdaten ins Bundle gelangen; ohne Variablen meldet sich niemand an.
 function checkAdminCredentials($username, $password) {
     $expectedUser = $_ENV['ADMIN_USER'] ?? '';
     $expectedPassword = $_ENV['ADMIN_PASSWORD'] ?? '';

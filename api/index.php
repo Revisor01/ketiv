@@ -1,8 +1,5 @@
 <?php
-/**
- * Losungen API - Database Version
- * Serves daily readings from database instead of scraping
- */
+/** Losungen-API aus der Datenbank. */
 
 function logDocker($message) {
     file_put_contents('php://stdout', "[LOSUNGEN API] $message\n");
@@ -91,8 +88,7 @@ class LosungenService {
                 $losungData = $this->enhanceWithCachedTranslations($losungData, $translation, $date);
             }
             
-            // Bibelstellen über ERF Bibleserver API in gewünschter Übersetzung laden
-            // BIGS needs special URLs even without API key
+            // BIGS braucht eigene URLs auch ohne API-Schlüssel.
             if ($this->bibleserverApiKey || $translation === 'BIGS') {
                 $losungData = $this->enhanceWithBibleserver($losungData, $translation);
             } else {
@@ -248,8 +244,7 @@ class LosungenService {
             logDocker("[LOSUNGEN] Cache lookup failed: " . $e->getMessage());
         }
         
-        // Fallback: Texte für die Referenzen DIESES Datums über die interne
-        // Bibelsuche holen (Redis-gecacht) und Ergebnis in den Cache zurückschreiben
+        // Fallback über die interne Bibelsuche (Redis-gecacht), Ergebnis zurück in den Cache.
         logDocker("[LOSUNGEN] Cache miss for $translation, fetching via bible_search");
         return $this->enhanceWithTranslations($data, $translation, $date);
     }
@@ -293,10 +288,7 @@ class LosungenService {
         return $data;
     }
 
-    /**
-     * Interne Abfrage der Bibelsuche (bible_search.php) für eine einzelne Referenz.
-     * Nutzt deren Redis-Cache und Scraper-Logik, statt losungen.de erneut zu scrapen.
-     */
+    /** Nutzt Cache und Scraper der Bibelsuche, statt losungen.de erneut abzufragen. */
     private function fetchBibleText($reference, $translation) {
         $apiKey = $_SERVER['HTTP_X_API_KEY'] ?? $_GET['api_key'] ?? '';
 

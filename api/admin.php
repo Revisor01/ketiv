@@ -173,9 +173,6 @@ function manualFetch($translation = 'ALL') {
     }
 }
 
-/**
- * Lösche Redis Bible Cache
- */
 function clearBibleCache() {
     try {
         $cache = new RedisCache();
@@ -206,9 +203,6 @@ function clearBibleCache() {
     }
 }
 
-/**
- * Cache-Statistiken
- */
 function getCacheStats() {
     try {
         $cache = new RedisCache();
@@ -257,8 +251,7 @@ function clearCache() {
 }
 
 function getCronStatus() {
-    // Im Container liegt admin.php in /var/www/html/ (scripts/ ist Unterordner),
-    // im Repo liegt admin.php in api/ (scripts/ ist Nachbarordner)
+    // scripts/ liegt im Container unter admin.php, im Repo daneben.
     $candidates = [
         __DIR__ . '/scripts/cron_status.php',
         __DIR__ . '/../scripts/cron_status.php'

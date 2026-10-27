@@ -1,6 +1,5 @@
 <?php
-// Startet admin.php im eingebauten PHP-Server und prüft den Login über HTTP.
-// Aufruf: php tests/api/admin_login_test.php
+// Prüft den Admin-Login über HTTP. Aufruf: php tests/api/admin_login_test.php
 
 const TEST_USER = 'test-admin';
 const TEST_PASSWORD = 'test-passwort-123';

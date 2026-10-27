@@ -1,10 +1,5 @@
 <?php
-/**
- * Sunday/Kirchenjahr API Endpoint
- * Liefert alle relevanten Daten für einen Sonntag/Feiertag
- * Optional mit Bibeltexten in gewünschter Übersetzung
- * Optimiert für n8n und externe Integrationen
- */
+/** Sonntag/Kirchenjahr-Endpunkt, optional mit Bibeltexten. */
 
 require_once 'database.php';
 
@@ -17,17 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-/**
- * Berechnet die aktuelle Perikopenreihe basierend auf dem Datum
- * Reihe I startete 2018/19, rotiert alle 6 Jahre
- */
+/** Reihe I begann 2018/19, die Reihen rotieren alle sechs Jahre. */
 function getCurrentPerikopenreihe($date) {
     $dateObj = new DateTime($date);
     $year = (int)$dateObj->format('Y');
     $month = (int)$dateObj->format('n');
 
-    // Kirchenjahr beginnt am 1. Advent (ca. Ende November)
-    // Vereinfacht: Ab Dezember = neues Kirchenjahr
+    // Vereinfacht: ab Dezember gilt das neue Kirchenjahr.
     $kirchenjahrStart = $month >= 12 ? $year : $year - 1;
 
     // Reihe I startete 2018/19
@@ -42,9 +33,7 @@ function getCurrentPerikopenreihe($date) {
     ];
 }
 
-/**
- * Findet den nächsten Sonntag ab einem gegebenen Datum
- */
+/** Findet den nächsten Sonntag ab einem gegebenen Datum */
 function getNextSunday($date = null) {
     $dateObj = $date ? new DateTime($date) : new DateTime();
     $dayOfWeek = (int)$dateObj->format('w'); // 0 = Sonntag
@@ -60,9 +49,6 @@ function getNextSunday($date = null) {
     return $dateObj->format('Y-m-d');
 }
 
-/**
- * Formatiert Datum auf Deutsch
- */
 function formatGermanDate($date) {
     $wochentage = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
     $monate = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
@@ -76,17 +62,13 @@ function formatGermanDate($date) {
     return "$wochentag, $tag. $monat $jahr";
 }
 
-/**
- * Holt Bibeltext über bible_search.php
- * Gibt das komplette Ergebnis mit Versen zurück (inkl. optional-Markierung)
- */
+/** Bibeltext über bible_search.php, mit optional-Markierung. */
 function fetchBibleText($reference, $translation, $apiKey) {
     if (empty($reference)) {
         return null;
     }
 
-    // Originale Referenz beibehalten - bible_search.php kann Klammer-Notation verarbeiten
-    // Interne API-Anfrage
+    // Referenz unverändert, bible_search.php versteht Klammern.
     $baseUrl = 'http://localhost/bible_search.php';
     $params = http_build_query([
         'reference' => $reference,
@@ -118,9 +100,7 @@ function fetchBibleText($reference, $translation, $apiKey) {
     return $data['data'] ?? null;
 }
 
-/**
- * Normalisiert Bibelreferenz für Vergleich
- */
+/** Normalisiert Bibelreferenz für Vergleich */
 function normalizeReference($ref) {
     if (empty($ref)) return '';
     // Entferne Klammern, Leerzeichen, Bindestriche normalisieren

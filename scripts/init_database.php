@@ -1,8 +1,5 @@
 <?php
-/**
- * Manual Database Initialization Script
- * Führt das Schema aus, falls die Tabellen nicht existieren
- */
+/** Legt das Schema an, falls die Tabellen fehlen. */
 
 require_once __DIR__ . '/../api/database.php';
 

@@ -1,12 +1,10 @@
 <?php
-// GET /api/v1/tageslosung: Tageslosung ohne API-Schlüssel, für das Widget und
-// eigene Einbindungen. Beschreibung in docs/openapi.yaml.
+// GET /api/v1/tageslosung ohne API-Schlüssel; Beschreibung in docs/openapi.yaml.
 
 require_once __DIR__ . '/database.php';
 require_once __DIR__ . '/lib/tageslosung.php';
 
-// Großzügig je Besucher-IP, weil Gemeindenetze viele Besucher hinter einer
-// Adresse bündeln. Ein Seitenaufruf braucht höchstens eine Anfrage.
+// Großzügig, weil Gemeindenetze viele Besucher hinter einer Adresse bündeln.
 const TAGESLOSUNG_GRENZE = 6000;
 const TAGESLOSUNG_FENSTER = 600;
 

@@ -1,7 +1,5 @@
 <?php
-// Öffentliche Tageslosung ohne API-Schlüssel. Liest nur, was der tägliche Abruf
-// bereits gespeichert hat, und fragt nie selbst eine Bibelquelle an: so lässt
-// sich der Endpunkt nicht als Umweg zur Bibelsuche missbrauchen.
+// Liest nur Gespeichertes und fragt nie eine Bibelquelle an, damit der Endpunkt kein Umweg zur Bibelsuche wird.
 
 const TAGESLOSUNG_QUELLE = [
     'name' => 'Die Losungen',
@@ -11,8 +9,7 @@ const TAGESLOSUNG_QUELLE = [
     'info_url' => 'https://www.losungen.de',
 ];
 
-// Nur Übersetzungen, die der tägliche Abruf zuverlässig füllt und deren
-// Rechteinhaber sich angeben lassen.
+// Nur Übersetzungen, die der tägliche Abruf zuverlässig füllt und deren Rechteinhaber sich angeben lassen.
 const TAGESLOSUNG_UEBERSETZUNGEN = [
     'LUT' => ['Lutherbibel, revidiert 2017', '© 2016 Deutsche Bibelgesellschaft, Stuttgart'],
     'ELB' => ['Elberfelder Bibel', '© 2006 SCM R.Brockhaus, Holzgerlingen'],
@@ -75,8 +72,7 @@ final class PdoTageslosungQuelle implements TageslosungQuelle {
     }
 }
 
-// Festes Zeitfenster je Besucher-IP. Fällt Redis aus, wird nicht gesperrt:
-// der Endpunkt liest nur und soll für die Gemeindeseiten erreichbar bleiben.
+// Fällt Redis aus, wird nicht gesperrt: der Endpunkt liest nur und soll erreichbar bleiben.
 final class RedisTageslosungBegrenzer implements TageslosungBegrenzer {
     private $redis;
     private $grenze;
@@ -135,11 +131,7 @@ final class RedisTageslosungZwischenspeicher implements TageslosungZwischenspeic
     }
 }
 
-/**
- * Besucher-IP hinter den vorgeschalteten Proxys. X-Real-IP setzt der eigene
- * Webserver und überschreibt dabei einen mitgeschickten Wert; ohne ihn gilt die
- * rechteste öffentliche Adresse aus X-Forwarded-For.
- */
+/** X-Real-IP setzt der eigene Webserver; ohne ihn gilt die rechteste öffentliche Adresse aus X-Forwarded-For. */
 function tageslosungClientIp(array $server): string {
     $oeffentlich = FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE;
     $real = trim($server['HTTP_X_REAL_IP'] ?? '');

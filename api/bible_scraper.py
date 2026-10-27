@@ -1,8 +1,5 @@
 #!/opt/venv/bin/python3
-"""
-Erweiterte Bible-Scraper für Ketiv
-Unterstützt Einzelverse, Versbereiche und verschiedene Quellen
-"""
+"""Bibeltext-Scraper für Ketiv."""
 
 import requests
 from bs4 import BeautifulSoup
@@ -385,8 +382,7 @@ class BibleScraper:
             if len(cut_text) > 10:  # Mindestens ein paar Wörter
                 return cut_text
         
-        # Fallback: Wenn kein Satzende gefunden wird oder Text zu kurz ist
-        # Schneide nach etwa der Hälfte des Textes ab
+        # Ohne Satzende etwa in der Mitte abschneiden.
         words = text.split()
         if len(words) > 4:
             half_words = words[:len(words)//2]

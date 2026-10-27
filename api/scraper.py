@@ -234,8 +234,7 @@ def get_bible_text_from_bibleserver(reference, translation='LUT'):
 def get_bible_text_from_bigs(reference):
     """Lädt spezifischen Bibelvers von Bibel in gerechter Sprache"""
     try:
-        # Statische Mappings für häufige Bibelstellen
-        # Da BIGS schwierig zu scrapen ist, verwenden wir bekannte Übersetzungen
+        # Feste Texte für häufige Stellen, weil BIGS schwer zu scrapen ist.
         bigs_texts = {
             'Psalm 103,11': 'Ja, hoch wie der Himmel über der Erde ist ihre Güte mächtig über denen, die ihr in Ehrfurcht begegnen.',
             'Römer 5,20': 'Wo aber die Sünde zugenommen hat, da ist die Gnade überreich geworden.',
@@ -410,7 +409,6 @@ def main():
         print(json.dumps(error_result, ensure_ascii=False))
         return
 
-    # Basisdaten: bevorzugt aus Argumenten (Datenbank), sonst von losungen.de scrapen
     # Aufruf: scraper.py <TRANS> <losung_ref> <lehrtext_ref> <losung_text> <lehrtext_text> [datum]
     if len(sys.argv) >= 6:
         result = build_base_from_args(

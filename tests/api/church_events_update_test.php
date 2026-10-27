@@ -1,6 +1,5 @@
 <?php
-// Prüft die Schlüsselprüfung von church_events_update.php über HTTP.
-// Aufruf: php tests/api/church_events_update_test.php
+// Schlüsselprüfung von church_events_update.php. Aufruf: php tests/api/church_events_update_test.php
 
 const TEST_KEY = 'test-api-key-1';
 
