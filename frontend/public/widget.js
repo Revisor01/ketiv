@@ -1,4 +1,4 @@
-/* Ketiv-Widget: zeigt die Tageslosung auf einer Website; Einbindung im README. */
+/* Ketiv-Widget: zeigt die Tageslosung auf einer Website; Einbindung in docs/widget.md. */
 /* Lizenz: AGPL-3.0, https://github.com/Revisor01/ketiv */
 (function () {
   'use strict';
