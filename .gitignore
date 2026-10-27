@@ -14,7 +14,7 @@ dist/
 *.log
 
 # Landing page for the API image — built from frontend/ by CI
-public/
+/public/
 
 # IDE
 .vscode/

@@ -50,6 +50,20 @@ RUN echo 'server {' > /etc/nginx/conf.d/default.conf && \
     echo '        add_header Cache-Control "public, immutable";' >> /etc/nginx/conf.d/default.conf && \
     echo '    }' >> /etc/nginx/conf.d/default.conf && \
     echo '' >> /etc/nginx/conf.d/default.conf && \
+    echo '    # Widget fuer fremde Seiten: kurz cachen, damit Aenderungen binnen einer Stunde ankommen' >> /etc/nginx/conf.d/default.conf && \
+    echo '    location = /widget.js {' >> /etc/nginx/conf.d/default.conf && \
+    echo '        add_header Cache-Control "public, max-age=3600";' >> /etc/nginx/conf.d/default.conf && \
+    echo '        add_header Access-Control-Allow-Origin "*";' >> /etc/nginx/conf.d/default.conf && \
+    echo '        add_header X-Content-Type-Options "nosniff" always;' >> /etc/nginx/conf.d/default.conf && \
+    echo '    }' >> /etc/nginx/conf.d/default.conf && \
+    echo '' >> /etc/nginx/conf.d/default.conf && \
+    echo '    # Schriften des Widgets: fremde Seiten laden sie nur mit CORS' >> /etc/nginx/conf.d/default.conf && \
+    echo '    location /fonts/ {' >> /etc/nginx/conf.d/default.conf && \
+    echo '        expires 30d;' >> /etc/nginx/conf.d/default.conf && \
+    echo '        add_header Access-Control-Allow-Origin "*";' >> /etc/nginx/conf.d/default.conf && \
+    echo '        add_header X-Content-Type-Options "nosniff" always;' >> /etc/nginx/conf.d/default.conf && \
+    echo '    }' >> /etc/nginx/conf.d/default.conf && \
+    echo '' >> /etc/nginx/conf.d/default.conf && \
     echo '    # Security Headers' >> /etc/nginx/conf.d/default.conf && \
     echo '    add_header X-Frame-Options "SAMEORIGIN" always;' >> /etc/nginx/conf.d/default.conf && \
     echo '    add_header X-Content-Type-Options "nosniff" always;' >> /etc/nginx/conf.d/default.conf && \

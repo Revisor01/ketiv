@@ -7,6 +7,10 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+### Hinzugefügt
+- Die Tageslosung lässt sich ohne API-Schlüssel abrufen und mit einer Zeile auf jeder Website einbinden, samt der vorgeschriebenen Quellenangabe.
+- Das Widget lässt sich in Farbe, Schrift und Auswahl der Verse an die eigene Seite anpassen oder füllt vorhandenes Markup der Seite.
+
 ### Behoben
 - Änderungen an Kirchenjahres-Terminen in der Verwaltung ließen sich nicht speichern; der Server brach jede Anfrage mit einem Fehler ab.
 - Die tägliche Losung wurde nicht mehr angezeigt: die Anwendung meldete sich mit
