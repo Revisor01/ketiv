@@ -32,6 +32,7 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 ### Sonstiges
 - README, Vorlagen und Hinweise gibt es nur noch auf Deutsch.
 - Laufzeitumgebung für Bau und Tests der Oberfläche auf die aktuelle Langzeit-Version gehoben.
+- Laufzeit und Oberfläche auf aktuelle Fassungen gehoben; nicht mehr genutzte Bibliotheken entfernt.
 
 ## [2.4.0] - 2026-08-14
 
