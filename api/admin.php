@@ -13,29 +13,21 @@ require_once __DIR__ . '/database.php';
 require_once __DIR__ . '/redis_cache.php';
 require_once __DIR__ . '/auth.php';
 
-if (($_GET['action'] ?? '') === 'login') {
+$action = $_GET['action'] ?? '';
+if ($action === 'login') {
     handleAdminLogin();
     exit;
 }
-
-// API Key validation
-$apiKeys = [
-    $_ENV['API_KEY_1'] ?? '',
-    $_ENV['API_KEY_2'] ?? '',
-    $_ENV['API_KEY_3'] ?? ''
-];
-
-$providedKey = $_GET['api_key'] ?? $_SERVER['HTTP_X_API_KEY'] ?? '';
-$validKey = false;
-
-foreach ($apiKeys as $key) {
-    if (!empty($key) && $providedKey === $key) {
-        $validKey = true;
-        break;
-    }
+if ($action === 'session') {
+    handleAdminSession();
+    exit;
+}
+if ($action === 'logout') {
+    handleAdminLogout();
+    exit;
 }
 
-if (!$validKey) {
+if (!validateApiKey()) {
     http_response_code(401);
     echo json_encode([
         'success' => false,
@@ -44,9 +36,6 @@ if (!$validKey) {
     ]);
     exit;
 }
-
-// Admin actions
-$action = $_GET['action'] ?? '';
 
 try {
     switch ($action) {
