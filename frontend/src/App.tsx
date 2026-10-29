@@ -12,7 +12,7 @@ import './styles/globals.css';
 
 // Wrapper für geschützte Routen
 function ProtectedRoutes() {
-  const { isAuthenticated, login, user } = useAuth();
+  const { isAuthenticated, checking, login, user } = useAuth();
   const [loginError, setLoginError] = useState<string>('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -32,6 +32,10 @@ function ProtectedRoutes() {
   const handleRouteChange = () => {
     setIsMenuOpen(false);
   };
+
+  if (checking) {
+    return null;
+  }
 
   if (!isAuthenticated) {
     return <LoginForm onLogin={handleLogin} error={loginError} />;

@@ -22,9 +22,8 @@ class ApiService {
     this.apiKey = apiKey;
   }
 
-  // Get current API key (for auth context)
   getApiKey(): string {
-    return (window as any).__BIBLESCRAPER_API_KEY__ || this.apiKey;
+    return this.apiKey;
   }
 
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<ApiResponse<T>> {

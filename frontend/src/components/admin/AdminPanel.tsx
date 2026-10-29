@@ -9,7 +9,6 @@ import {
   ExclamationTriangleIcon,
   ArrowPathIcon
 } from '@heroicons/react/24/outline';
-import { useAuth } from '../../context/AuthContext';
 import { BibleAbbreviations } from './BibleAbbreviations';
 import { ADMIN_BASE } from '../../services/api';
 
@@ -38,15 +37,12 @@ interface CronStatus {
 }
 
 export const AdminPanel: React.FC = () => {
-  const { user } = useAuth();
   const [systemStatus, setSystemStatus] = useState<SystemStatus | null>(null);
   const [cronStatus, setCronStatus] = useState<CronStatus | null>(null);
   const [loading, setLoading] = useState(false);
   const [fetchLoading, setFetchLoading] = useState(false);
   const [clearLoading, setClearLoading] = useState(false);
   const [lastAction, setLastAction] = useState<string>('');
-
-  const apiKey = user?.apiKey || '';
 
   useEffect(() => {
     loadStatus();
@@ -58,14 +54,14 @@ export const AdminPanel: React.FC = () => {
       const baseUrl = ADMIN_BASE;
 
       // Load system status
-      const statusResponse = await fetch(`${baseUrl}/admin.php?action=status&api_key=${apiKey}`);
+      const statusResponse = await fetch(`${baseUrl}/admin.php?action=status`, { credentials: 'include' });
       const statusData = await statusResponse.json();
       if (statusData.success) {
         setSystemStatus(statusData.data);
       }
 
       // Load cron status
-      const cronResponse = await fetch(`${baseUrl}/admin.php?action=cron_status&api_key=${apiKey}`);
+      const cronResponse = await fetch(`${baseUrl}/admin.php?action=cron_status`, { credentials: 'include' });
       const cronData = await cronResponse.json();
       if (cronData.success) {
         setCronStatus(cronData.data);
@@ -79,7 +75,7 @@ export const AdminPanel: React.FC = () => {
   const manualFetch = async () => {
     setFetchLoading(true);
     try {
-      const response = await fetch(`${ADMIN_BASE}/admin.php?action=fetch&api_key=${apiKey}`);
+      const response = await fetch(`${ADMIN_BASE}/admin.php?action=fetch`, { credentials: 'include' });
       const data = await response.json();
 
       if (data.success) {
@@ -101,7 +97,7 @@ export const AdminPanel: React.FC = () => {
 
     setClearLoading(true);
     try {
-      const response = await fetch(`${ADMIN_BASE}/admin.php?action=clear_bible_cache&api_key=${apiKey}`);
+      const response = await fetch(`${ADMIN_BASE}/admin.php?action=clear_bible_cache`, { credentials: 'include' });
       const data = await response.json();
 
       if (data.success) {

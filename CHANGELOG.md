@@ -17,6 +17,7 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   einem veralteten Zugangsschlüssel an und wurde abgewiesen.
 
 ### Sicherheit
+- Die Anmeldung in der Verwaltung gilt jetzt über ein Sitzungs-Cookie, das Skripte auf der Seite nicht lesen können. Der API-Schlüssel liegt nicht mehr im Browser, ein früher dort gespeicherter wird gelöscht.
 - Fehlermeldungen des Servers erscheinen nicht mehr in den Antworten der API.
 - Fehlt die Konfiguration der Zugangsschlüssel, ist die API jetzt gesperrt. Bisher
   galten in diesem Fall feste Ersatzschlüssel, die im Quelltext standen.
