@@ -40,7 +40,7 @@ RUN echo 'RewriteEngine On' > /var/www/html/.htaccess \
     && echo 'RewriteRule ^api/v1/tageslosung/?$ /tageslosung.php [QSA,L]' >> /var/www/html/.htaccess \
     && echo '# Admin panel and Bible search files exist and should be served directly' >> /var/www/html/.htaccess \
     && echo 'RewriteCond %{REQUEST_FILENAME} -f' >> /var/www/html/.htaccess \
-    && echo 'RewriteRule ^(admin\.php|bible_search\.php|church_events\.php|church_events_update\.php|losungen_db\.php|sunday\.php)$ - [L]' >> /var/www/html/.htaccess \
+    && echo 'RewriteRule ^(admin\.php|bible_search\.php|church_events\.php|church_events_update\.php|losungen_db\.php)$ - [L]' >> /var/www/html/.htaccess \
     && echo '# Non-existing files with conditions' >> /var/www/html/.htaccess \
     && echo 'RewriteCond %{REQUEST_FILENAME} !-f' >> /var/www/html/.htaccess \
     && echo 'RewriteCond %{REQUEST_FILENAME} !-d' >> /var/www/html/.htaccess \

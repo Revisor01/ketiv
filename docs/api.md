@@ -43,11 +43,10 @@ curl -H "X-API-Key: your-key" "https://api.example.com/?translation=HFA"
 | Datei | Zweck |
 |-------|-------|
 | `bible_search.php` | Bibelstelle in einer Übersetzung, z. B. `?reference=Johannes 3,16&translation=LUT` |
-| `sunday.php` | Sonntag oder Feiertag im Kirchenjahr mit den zugehörigen Texten, optional in einer Übersetzung |
 | `church_events.php` | liturgische Termine aus der Datenbank |
 | `admin.php` | Verwaltung für die Weboberfläche; `?action=login` (POST) prüft Benutzername und Passwort und setzt ein Sitzungs-Cookie, `?action=session` nennt den angemeldeten Benutzer, `?action=logout` (POST) beendet die Sitzung |
 
-Tageslosung (`/`), Bibelstellensuche und `church_events.php` verlangen einen API-Schlüssel oder eine Sitzung der Verwaltung; `sunday.php` gibt Bibeltexte nur mit Schlüssel aus.
+Tageslosung (`/`), Bibelstellensuche und `church_events.php` verlangen einen API-Schlüssel oder eine Sitzung der Verwaltung.
 
 ## Verfügbare Übersetzungen
 

@@ -1,5 +1,5 @@
 <?php
-// Zugangsprüfung von church_events.php. Aufruf: php tests/api/church_events_test.php
+// Zugangsprüfung von church_events.php, sunday.php entfällt. Aufruf: php tests/api/church_events_test.php
 
 const TEST_KEY = 'test-api-key-1';
 const TEST_USER = 'testverwaltung';
@@ -59,6 +59,10 @@ try {
     // Ohne erreichbare Datenbank endet eine angenommene Anfrage beim Datenbankfehler.
     [$status, $json] = call($port, 'GET', '/church_events.php?action=next', ['X-API-Key' => TEST_KEY]);
     check('gültiger Schlüssel: Prüfung bestanden, Datenbankfehler 400', $status === 400 && ($json['error'] ?? null) === 'Database connection failed');
+
+    // Der eingebaute PHP-Server leitet fehlende Dateien auf index.php um, daher Datei und Rewrite-Regel statt Statuscode.
+    check('sunday.php entfällt: keine Datei', !file_exists(__DIR__ . '/../../api/sunday.php'));
+    check('sunday.php entfällt: keine Rewrite-Regel', !str_contains(file_get_contents(__DIR__ . '/../../Dockerfile'), 'sunday'));
 
     [$status] = call($port, 'OPTIONS', '/church_events.php');
     check('Vorabanfrage ohne Schlüssel: 200', $status === 200);

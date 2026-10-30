@@ -26,6 +26,9 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   Zugangsschlüssel in der ausgelieferten Webseite und waren dort lesbar.
 - Ein Werkzeug, mit dem das Stylesheet gebaut wird, auf eine Version ohne bekannte Sicherheitslücke angehoben. Das ausgelieferte Stylesheet ist unverändert.
 
+### Entfernt
+- Der Endpunkt für den kommenden Sonntag im Kirchenjahr (`sunday.php`) entfällt; er wurde nicht mehr abgerufen.
+
 ### Geändert
 - Neue Lizenz: GNU AGPL v3.0 statt MIT: Wer die Software verändert und anderen bereitstellt, auch als Webdienst, legt seine Änderungen offen. Eine kommerzielle Lizenz gibt es auf Anfrage.
 - Alle Zugriffe laufen jetzt über ketiv.de. Die frühere Spiegel-Adresse
