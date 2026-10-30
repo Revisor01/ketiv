@@ -17,6 +17,7 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   einem veralteten Zugangsschlüssel an und wurde abgewiesen.
 
 ### Sicherheit
+- Die liturgischen Termine des Kirchenjahres gibt die API nur noch mit API-Schlüssel oder angemeldeter Verwaltung heraus.
 - Die Anmeldung in der Verwaltung gilt jetzt über ein Sitzungs-Cookie, das Skripte auf der Seite nicht lesen können. Der API-Schlüssel liegt nicht mehr im Browser, ein früher dort gespeicherter wird gelöscht.
 - Fehlermeldungen des Servers erscheinen nicht mehr in den Antworten der API.
 - Fehlt die Konfiguration der Zugangsschlüssel, ist die API jetzt gesperrt. Bisher
@@ -24,6 +25,9 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Die Anmeldung prüft jetzt der Server. Bisher standen Passwort und
   Zugangsschlüssel in der ausgelieferten Webseite und waren dort lesbar.
 - Ein Werkzeug, mit dem das Stylesheet gebaut wird, auf eine Version ohne bekannte Sicherheitslücke angehoben. Das ausgelieferte Stylesheet ist unverändert.
+
+### Entfernt
+- Der Endpunkt für den kommenden Sonntag im Kirchenjahr (`sunday.php`) entfällt; er wurde nicht mehr abgerufen.
 
 ### Geändert
 - Neue Lizenz: GNU AGPL v3.0 statt MIT: Wer die Software verändert und anderen bereitstellt, auch als Webdienst, legt seine Änderungen offen. Eine kommerzielle Lizenz gibt es auf Anfrage.
