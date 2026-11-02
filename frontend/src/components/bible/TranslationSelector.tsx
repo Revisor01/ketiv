@@ -68,11 +68,11 @@ export const TranslationSelector: React.FC<TranslationSelectorProps> = ({
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl px-4 py-3 text-left shadow-card hover:shadow-card-hover transition-all focus:outline-none focus:ring-2 focus:ring-royal-500/20"
+        className="w-full flex items-center justify-between bg-white/80 backdrop-blur-xs border border-gray-200 rounded-xl px-4 py-3 text-left shadow-card hover:shadow-card-hover transition-all focus:outline-hidden focus:ring-2 focus:ring-royal-500/20"
       >
         <div className="flex items-center space-x-3 min-w-0 flex-1">
           {selectedTranslation?.code && (
-            <span className="font-mono text-sm font-medium text-royal-600 bg-royal-50 px-2 py-1 rounded-md flex-shrink-0">
+            <span className="font-mono text-sm font-medium text-royal-600 bg-royal-50 px-2 py-1 rounded-md shrink-0">
               {selectedTranslation.code}
             </span>
           )}
@@ -97,7 +97,7 @@ export const TranslationSelector: React.FC<TranslationSelectorProps> = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-xl shadow-xl max-h-80 overflow-hidden z-[100]"
+            className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-xl shadow-xl max-h-80 overflow-hidden z-100"
           >
             {/* Search Input */}
             <div className="p-3 border-b border-gray-100">
@@ -107,7 +107,7 @@ export const TranslationSelector: React.FC<TranslationSelectorProps> = ({
                 placeholder="Übersetzung suchen..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500"
+                className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-royal-500/20 focus:border-royal-500"
               />
             </div>
 
@@ -140,7 +140,7 @@ export const TranslationSelector: React.FC<TranslationSelectorProps> = ({
                       className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-royal-25 transition-colors"
                     >
                       <div className="flex items-center space-x-3 min-w-0 flex-1">
-                        <span className="font-mono text-sm font-medium text-royal-600 bg-royal-50 px-2 py-1 rounded-md min-w-[3rem] text-center flex-shrink-0">
+                        <span className="font-mono text-sm font-medium text-royal-600 bg-royal-50 px-2 py-1 rounded-md min-w-12 text-center shrink-0">
                           {translation.code}
                         </span>
                         <span className="font-medium text-gray-900 truncate">

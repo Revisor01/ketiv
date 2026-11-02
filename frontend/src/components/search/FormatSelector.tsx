@@ -52,7 +52,7 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
         whileTap={{ scale: disabled ? 1 : 0.98 }}
         onClick={() => !disabled && setIsOpen(!isOpen)}
         disabled={disabled}
-        className="w-full flex items-center justify-between bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl px-4 py-3 text-left shadow-card hover:shadow-card-hover transition-all focus:outline-none focus:ring-2 focus:ring-royal-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full flex items-center justify-between bg-white/80 backdrop-blur-xs border border-gray-200 rounded-xl px-4 py-3 text-left shadow-card hover:shadow-card-hover transition-all focus:outline-hidden focus:ring-2 focus:ring-royal-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <div className="flex items-center space-x-3">
           {selectedFormat?.icon && (
@@ -84,7 +84,7 @@ export const FormatSelector: React.FC<FormatSelectorProps> = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute z-[9999] w-full mt-2 bg-white/95 backdrop-blur-lg border border-gray-200 rounded-xl shadow-xl overflow-hidden"
+            className="absolute z-9999 w-full mt-2 bg-white/95 backdrop-blur-lg border border-gray-200 rounded-xl shadow-xl overflow-hidden"
           >
             {/* Format List */}
             <div className="py-1">

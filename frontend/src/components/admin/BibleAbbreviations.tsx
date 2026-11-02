@@ -136,7 +136,7 @@ export const BibleAbbreviations: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow-sm p-6">
+      <div className="bg-white rounded-lg shadow-xs p-6">
         <h3 className="font-heading text-lg font-semibold text-gray-900 mb-4">
           Bibel-Abkürzungen verwalten
         </h3>
@@ -220,13 +220,13 @@ export const BibleAbbreviations: React.FC = () => {
                             const input = e.currentTarget.previousElementSibling as HTMLInputElement;
                             handleUpdate(abbrev, input.value);
                           }}
-                          className="p-1.5 rounded bg-green-100 hover:bg-green-200"
+                          className="p-1.5 rounded-sm bg-green-100 hover:bg-green-200"
                         >
                           <CheckIcon className="w-4 h-4 text-green-600" />
                         </button>
                         <button
                           onClick={() => setEditingId(null)}
-                          className="p-1.5 rounded bg-gray-100 hover:bg-gray-200"
+                          className="p-1.5 rounded-sm bg-gray-100 hover:bg-gray-200"
                         >
                           <XMarkIcon className="w-4 h-4 text-gray-600" />
                         </button>
@@ -236,7 +236,7 @@ export const BibleAbbreviations: React.FC = () => {
                         {abbrev.abbreviations.map((a, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
+                            className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-sm"
                           >
                             {a}
                           </span>
@@ -300,13 +300,13 @@ export const BibleAbbreviations: React.FC = () => {
                             const input = e.currentTarget.previousElementSibling as HTMLInputElement;
                             handleUpdate(abbrev, input.value);
                           }}
-                          className="p-1.5 rounded bg-green-100 hover:bg-green-200"
+                          className="p-1.5 rounded-sm bg-green-100 hover:bg-green-200"
                         >
                           <CheckIcon className="w-4 h-4 text-green-600" />
                         </button>
                         <button
                           onClick={() => setEditingId(null)}
-                          className="p-1.5 rounded bg-gray-100 hover:bg-gray-200"
+                          className="p-1.5 rounded-sm bg-gray-100 hover:bg-gray-200"
                         >
                           <XMarkIcon className="w-4 h-4 text-gray-600" />
                         </button>

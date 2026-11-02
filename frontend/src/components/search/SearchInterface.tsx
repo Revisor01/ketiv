@@ -291,7 +291,7 @@ export const SearchInterface: React.FC = () => {
                       setSearchResult(null);
                       setCompareResults(null);
                     }}
-                    className="rounded border-gray-300"
+                    className="rounded-sm border-gray-300"
                   />
                   <span>Übersetzungen vergleichen (nebeneinander)</span>
                 </label>
@@ -368,10 +368,10 @@ export const SearchInterface: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="card p-6 mb-8 bg-gradient-to-r from-blue-50 to-purple-50"
+            className="card p-6 mb-8 bg-linear-to-r from-blue-50 to-purple-50"
           >
             <div className="flex items-start space-x-4">
-              <CalendarIcon className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+              <CalendarIcon className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="font-heading text-lg font-semibold text-gray-900">
@@ -669,7 +669,7 @@ export const SearchInterface: React.FC = () => {
                           }`}
                         >
                           <span 
-                            className={`flex-shrink-0 min-w-[2rem] h-8 px-2 rounded-full flex items-center justify-center text-sm font-semibold ${
+                            className={`shrink-0 min-w-8 h-8 px-2 rounded-full flex items-center justify-center text-sm font-semibold ${
                               verse.excluded 
                                 ? 'bg-orange-100 text-orange-700'
                                 : verse.optional
@@ -718,7 +718,7 @@ export const SearchInterface: React.FC = () => {
                       type="checkbox"
                       checked={copyWithReference}
                       onChange={(e) => setCopyWithReference(e.target.checked)}
-                      className="rounded border-gray-300"
+                      className="rounded-sm border-gray-300"
                     />
                     <span>Referenz als Überschrift</span>
                   </label>
@@ -727,7 +727,7 @@ export const SearchInterface: React.FC = () => {
                       type="checkbox"
                       checked={copyWithVerseNumbers}
                       onChange={(e) => setCopyWithVerseNumbers(e.target.checked)}
-                      className="rounded border-gray-300"
+                      className="rounded-sm border-gray-300"
                     />
                     <span>Versnummern</span>
                   </label>
@@ -737,7 +737,7 @@ export const SearchInterface: React.FC = () => {
                         type="checkbox"
                         checked={showExcludedVerses}
                         onChange={(e) => setShowExcludedVerses(e.target.checked)}
-                        className="rounded border-gray-300"
+                        className="rounded-sm border-gray-300"
                       />
                       <span>Ausgeschlossene Verse</span>
                     </label>
@@ -748,7 +748,7 @@ export const SearchInterface: React.FC = () => {
                         type="checkbox"
                         checked={showOptionalVerses}
                         onChange={(e) => setShowOptionalVerses(e.target.checked)}
-                        className="rounded border-gray-300"
+                        className="rounded-sm border-gray-300"
                       />
                       <span>Optionale Verse</span>
                     </label>
@@ -858,7 +858,7 @@ export const SearchInterface: React.FC = () => {
                         type="checkbox"
                         checked={showExcludedVerses}
                         onChange={(e) => setShowExcludedVerses(e.target.checked)}
-                        className="rounded border-gray-300"
+                        className="rounded-sm border-gray-300"
                       />
                       <span>Ausgeschlossene Verse</span>
                     </label>
@@ -869,7 +869,7 @@ export const SearchInterface: React.FC = () => {
                         type="checkbox"
                         checked={showOptionalVerses}
                         onChange={(e) => setShowOptionalVerses(e.target.checked)}
-                        className="rounded border-gray-300"
+                        className="rounded-sm border-gray-300"
                       />
                       <span>Optionale Verse</span>
                     </label>

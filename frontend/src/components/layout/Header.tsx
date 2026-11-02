@@ -32,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <div className="w-8 h-8 bg-gradient-royal rounded-xl flex items-center justify-center">
                 {/* Kaf — Anfangsbuchstabe von כְּתִיב (ketiv) */}
-                <span className="text-white font-semibold text-xl leading-none translate-y-[1px]">כ</span>
+                <span className="text-white font-semibold text-xl leading-none translate-y-px">כ</span>
               </div>
               <h1 className="font-heading text-xl font-bold gradient-text">
                 Ketiv
@@ -50,7 +50,7 @@ export const Header: React.FC<HeaderProps> = ({
           </nav>
 
           {/* User Menu & Mobile Toggle */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-4">
             {/* User Info */}
             {user ? (
               <div className="hidden sm:flex items-center space-x-3">
