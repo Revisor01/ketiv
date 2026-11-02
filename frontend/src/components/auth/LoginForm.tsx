@@ -18,7 +18,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, error }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-royal-50 to-royal-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-royal-50 to-royal-100 py-12 px-4 sm:px-6 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -112,7 +112,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, error }) => {
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-royal-600 to-royal-700 hover:from-royal-700 hover:to-royal-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-royal-500 transition-all duration-200"
+              className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-linear-to-r from-royal-600 to-royal-700 hover:from-royal-700 hover:to-royal-800 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-royal-500 transition-all duration-200"
             >
               Anmelden
             </motion.button>

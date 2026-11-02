@@ -62,7 +62,7 @@ export const EditableChurchEvent: React.FC<EditableChurchEventProps> = ({ event,
         <textarea
           value={value || ''}
           onChange={(e) => handleFieldChange(field, e.target.value)}
-          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
           rows={2}
         />
       ) : (
@@ -70,7 +70,7 @@ export const EditableChurchEvent: React.FC<EditableChurchEventProps> = ({ event,
           type="text"
           value={value || ''}
           onChange={(e) => handleFieldChange(field, e.target.value)}
-          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+          className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
         />
       )}
     </div>
@@ -154,7 +154,7 @@ export const EditableChurchEvent: React.FC<EditableChurchEventProps> = ({ event,
                     type="text"
                     value={editedEvent.perikopen?.[reihe] || ''}
                     onChange={(e) => handlePerikopen(reihe, e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                   />
                 </div>
               ))}

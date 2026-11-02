@@ -449,7 +449,7 @@ export const ChurchYearCalendar: React.FC = () => {
                             type="text"
                             value={editedEvent.summary || ''}
                             onChange={(e) => updateEditedField('summary', e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                           />
                         </div>
                         <div>
@@ -458,7 +458,7 @@ export const ChurchYearCalendar: React.FC = () => {
                             type="text"
                             value={editedEvent.liturgicalColor || ''}
                             onChange={(e) => updateEditedField('liturgicalColor', e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                           />
                         </div>
                         
@@ -469,7 +469,7 @@ export const ChurchYearCalendar: React.FC = () => {
                             type="text"
                             value={editedEvent.season || ''}
                             onChange={(e) => updateEditedField('season', e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                           />
                         </div>
                         <div>
@@ -478,7 +478,7 @@ export const ChurchYearCalendar: React.FC = () => {
                             type="text"
                             value={editedEvent.weeklyVerseReference || ''}
                             onChange={(e) => updateEditedField('weeklyVerseReference', e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                           />
                         </div>
                         
@@ -488,7 +488,7 @@ export const ChurchYearCalendar: React.FC = () => {
                           <textarea
                             value={editedEvent.weeklyVerse || ''}
                             onChange={(e) => updateEditedField('weeklyVerse', e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                             rows={2}
                           />
                         </div>
@@ -500,7 +500,7 @@ export const ChurchYearCalendar: React.FC = () => {
                             type="text"
                             value={editedEvent.psalm || ''}
                             onChange={(e) => updateEditedField('psalm', e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                           />
                         </div>
                         <div>
@@ -509,7 +509,7 @@ export const ChurchYearCalendar: React.FC = () => {
                             type="text"
                             value={editedEvent.psalm_eg || ''}
                             onChange={(e) => updateEditedField('psalm_eg', e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                             placeholder="z.B. EG 311"
                           />
                         </div>
@@ -519,7 +519,7 @@ export const ChurchYearCalendar: React.FC = () => {
                             type="text"
                             value={editedEvent.oldTestamentReading || ''}
                             onChange={(e) => updateEditedField('oldTestamentReading', e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                           />
                         </div>
                         <div>
@@ -528,7 +528,7 @@ export const ChurchYearCalendar: React.FC = () => {
                             type="text"
                             value={editedEvent.epistle || ''}
                             onChange={(e) => updateEditedField('epistle', e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                           />
                         </div>
                         <div>
@@ -537,7 +537,7 @@ export const ChurchYearCalendar: React.FC = () => {
                             type="text"
                             value={editedEvent.gospel || ''}
                             onChange={(e) => updateEditedField('gospel', e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                           />
                         </div>
                         
@@ -548,7 +548,7 @@ export const ChurchYearCalendar: React.FC = () => {
                             type="text"
                             value={editedEvent.hymn1 || ''}
                             onChange={(e) => updateEditedField('hymn1', e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                           />
                         </div>
                         <div>
@@ -557,7 +557,7 @@ export const ChurchYearCalendar: React.FC = () => {
                             type="text"
                             value={editedEvent.hymn1_eg || ''}
                             onChange={(e) => updateEditedField('hymn1_eg', e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                           />
                         </div>
                         <div>
@@ -566,7 +566,7 @@ export const ChurchYearCalendar: React.FC = () => {
                             type="text"
                             value={editedEvent.hymn2 || ''}
                             onChange={(e) => updateEditedField('hymn2', e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                           />
                         </div>
                         <div>
@@ -575,7 +575,7 @@ export const ChurchYearCalendar: React.FC = () => {
                             type="text"
                             value={editedEvent.hymn2_eg || ''}
                             onChange={(e) => updateEditedField('hymn2_eg', e.target.value)}
-                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-royal-500"
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-hidden focus:ring-2 focus:ring-royal-500"
                           />
                         </div>
                       </div>

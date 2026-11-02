@@ -168,7 +168,7 @@ export const Dashboard: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="card p-4 bg-gradient-to-r from-gray-50 to-blue-50"
+              className="card p-4 bg-linear-to-r from-gray-50 to-blue-50"
             >
               <div className="flex items-center justify-between text-sm text-gray-600">
                 <div className="flex items-center space-x-4">

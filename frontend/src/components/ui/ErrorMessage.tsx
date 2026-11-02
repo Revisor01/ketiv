@@ -20,7 +20,7 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
       className={`card p-6 border-red-200 bg-red-50 ${className}`}
     >
       <div className="flex items-start space-x-3">
-        <ExclamationTriangleIcon className="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5" />
+        <ExclamationTriangleIcon className="w-6 h-6 text-red-500 shrink-0 mt-0.5" />
         
         <div className="flex-1">
           <h3 className="font-heading text-lg font-semibold text-red-800 mb-2">
@@ -35,7 +35,7 @@ export const ErrorMessage: React.FC<ErrorMessageProps> = ({
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={onRetry}
-              className="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+              className="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-colors focus:outline-hidden focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
             >
               <ArrowPathIcon className="w-4 h-4 mr-2" />
               Erneut versuchen
