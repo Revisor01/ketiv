@@ -26,6 +26,7 @@ jobs:
         working-directory: frontend
         run: |
           npm ci
+          npx tsc --noEmit
           npm test
 
       - name: API syntax
