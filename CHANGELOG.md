@@ -12,6 +12,7 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Das Widget lässt sich in Farbe, Schrift und Auswahl der Verse an die eigene Seite anpassen oder füllt vorhandenes Markup der Seite.
 
 ### Behoben
+- Die Startseite zeigt die Tageslosung wieder; sie fragte beim falschen Pfad nach.
 - Änderungen an Kirchenjahres-Terminen in der Verwaltung ließen sich nicht speichern; der Server brach jede Anfrage mit einem Fehler ab.
 - Die tägliche Losung wurde nicht mehr angezeigt: die Anwendung meldete sich mit
   einem veralteten Zugangsschlüssel an und wurde abgewiesen.
