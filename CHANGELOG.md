@@ -18,6 +18,7 @@ die Versionierung folgt [Semantic Versioning](https://semver.org/lang/de/).
   einem veralteten Zugangsschlüssel an und wurde abgewiesen.
 
 ### Sicherheit
+- Die Anmeldung in der Verwaltung sperrt nach zehn Versuchen in 15 Minuten je Adresse, damit sich Passwörter nicht durchprobieren lassen.
 - Ein alter Abruf der Losungen lieferte ohne API-Schlüssel jedes Datum aus und zeigte bei falschen Eingaben interne Datenbankmeldungen. Er ist entfernt; die öffentliche Tageslosung bleibt unverändert.
 - Die liturgischen Termine des Kirchenjahres gibt die API nur noch mit API-Schlüssel oder angemeldeter Verwaltung heraus.
 - Die Anmeldung in der Verwaltung gilt jetzt über ein Sitzungs-Cookie, das Skripte auf der Seite nicht lesen können. Der API-Schlüssel liegt nicht mehr im Browser, ein früher dort gespeicherter wird gelöscht.

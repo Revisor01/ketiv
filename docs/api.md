@@ -44,7 +44,7 @@ curl -H "X-API-Key: your-key" "https://api.example.com/?translation=HFA"
 |-------|-------|
 | `bible_search.php` | Bibelstelle in einer Übersetzung, z. B. `?reference=Johannes 3,16&translation=LUT` |
 | `church_events.php` | liturgische Termine aus der Datenbank |
-| `admin.php` | Verwaltung für die Weboberfläche; `?action=login` (POST) prüft Benutzername und Passwort und setzt ein Sitzungs-Cookie, `?action=session` nennt den angemeldeten Benutzer, `?action=logout` (POST) beendet die Sitzung |
+| `admin.php` | Verwaltung für die Weboberfläche; `?action=login` (POST) prüft Benutzername und Passwort und setzt ein Sitzungs-Cookie (nach 10 Versuchen in 15 Minuten je Adresse 429 mit `Retry-After`), `?action=session` nennt den angemeldeten Benutzer, `?action=logout` (POST) beendet die Sitzung |
 
 Tageslosung (`/`), Bibelstellensuche und `church_events.php` verlangen einen API-Schlüssel oder eine Sitzung der Verwaltung.
 

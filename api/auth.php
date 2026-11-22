@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/lib/tageslosung.php';
+
 // API Key Authentication für Bible Search
 function validateApiKey() {
     $apiKeys = [
@@ -80,10 +82,51 @@ function checkAdminCredentials($username, $password) {
     return $userOk && $passwordOk;
 }
 
+const ADMIN_LOGIN_MAX_VERSUCHE = 10;
+const ADMIN_LOGIN_FENSTER = 900;
+
+// Datei statt Redis, damit die Sperre auch ohne Redis greift.
+function adminLoginDatei($ip) {
+    $ordner = $_ENV['ADMIN_LOGIN_LIMIT_DIR'] ?? sys_get_temp_dir();
+    return rtrim($ordner, '/') . '/ketiv-login-' . hash('sha256', $ip);
+}
+
+// Zählt vor der Prüfung, damit parallele Anfragen die Grenze nicht überholen.
+function adminLoginVersuch($ip) {
+    $datei = fopen(adminLoginDatei($ip), 'c+');
+    if ($datei === false) {
+        return 0;
+    }
+    flock($datei, LOCK_EX);
+    $stand = json_decode(stream_get_contents($datei), true);
+    if (!is_array($stand) || ($stand['seit'] ?? 0) <= time() - ADMIN_LOGIN_FENSTER) {
+        $stand = ['seit' => time(), 'anzahl' => 0];
+    }
+    $stand['anzahl']++;
+    ftruncate($datei, 0);
+    rewind($datei);
+    fwrite($datei, json_encode($stand));
+    flock($datei, LOCK_UN);
+    fclose($datei);
+    return $stand['anzahl'];
+}
+
+function adminLoginZuruecksetzen($ip) {
+    @unlink(adminLoginDatei($ip));
+}
+
 function handleAdminLogin() {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         http_response_code(405);
         echo json_encode(['success' => false, 'error' => 'Method not allowed']);
+        return;
+    }
+
+    $ip = tageslosungClientIp($_SERVER);
+    if (adminLoginVersuch($ip) > ADMIN_LOGIN_MAX_VERSUCHE) {
+        http_response_code(429);
+        header('Retry-After: ' . ADMIN_LOGIN_FENSTER);
+        echo json_encode(['success' => false, 'error' => 'Too many login attempts']);
         return;
     }
 
@@ -99,6 +142,7 @@ function handleAdminLogin() {
         return;
     }
 
+    adminLoginZuruecksetzen($ip);
     adminSessionStart();
     session_regenerate_id(true);
     $_SESSION['admin'] = $username;
