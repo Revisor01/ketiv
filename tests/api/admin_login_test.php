@@ -23,8 +23,8 @@ function startServer(array $env) {
 }
 
 // Liefert Status, JSON und die Set-Cookie-Zeilen der Antwort.
-function request($port, $method, $action, $body = null, $cookie = null) {
-    $header = "Content-Type: application/json\r\n" . ($cookie === null ? '' : "Cookie: $cookie\r\n");
+function request($port, $method, $action, $body = null, $cookie = null, $extra = '') {
+    $header = "Content-Type: application/json\r\n" . ($cookie === null ? '' : "Cookie: $cookie\r\n") . $extra;
     $context = stream_context_create(['http' => [
         'method' => $method,
         'header' => $header,
@@ -57,7 +57,13 @@ function check($name, $condition) {
     }
 }
 
-$configured = ['ADMIN_USER' => TEST_USER, 'ADMIN_PASSWORD' => TEST_PASSWORD, 'API_KEY_1' => TEST_KEY, 'PATH' => getenv('PATH')];
+function limitDir() {
+    $dir = sys_get_temp_dir() . '/ketiv-login-test-' . bin2hex(random_bytes(6));
+    mkdir($dir);
+    return $dir;
+}
+
+$configured = ['ADMIN_USER' => TEST_USER, 'ADMIN_PASSWORD' => TEST_PASSWORD, 'API_KEY_1' => TEST_KEY, 'PATH' => getenv('PATH'), 'ADMIN_LOGIN_LIMIT_DIR' => limitDir()];
 
 [$server, $port] = startServer($configured);
 try {
@@ -114,7 +120,38 @@ try {
     proc_terminate($server);
 }
 
-[$server, $port] = startServer(['API_KEY_1' => TEST_KEY, 'PATH' => getenv('PATH')]);
+// Eigener Zählerordner, damit die Fehlversuche oben nicht mitzählen.
+[$server, $port] = startServer(array_merge($configured, ['ADMIN_LOGIN_LIMIT_DIR' => limitDir()]));
+try {
+    $angreifer = "X-Real-IP: 8.8.8.8\r\n";
+    $andere = "X-Real-IP: 1.1.1.1\r\n";
+    $ok = 0;
+    for ($i = 0; $i < 10; $i++) {
+        [$status] = request($port, 'POST', 'login', ['username' => TEST_USER, 'password' => "falsch$i"], null, $angreifer);
+        $ok += $status === 401 ? 1 : 0;
+    }
+    check('zehn Fehlversuche: jeweils 401', $ok === 10);
+
+    [$status, $json, $cookies] = request($port, 'POST', 'login', ['username' => TEST_USER, 'password' => TEST_PASSWORD], null, $angreifer);
+    check('nach zehn Fehlversuchen: 429 auch mit richtigem Passwort', $status === 429);
+    check('nach zehn Fehlversuchen: kein Sitzungs-Cookie', sessionCookie($cookies) === null);
+
+    [$status] = request($port, 'POST', 'login', ['username' => TEST_USER, 'password' => TEST_PASSWORD], null, "X-Real-IP: 8.8.8.8\r\nX-Forwarded-For: 9.9.9.9\r\n");
+    check('gefälschtes X-Forwarded-For umgeht die Sperre nicht', $status === 429);
+
+    [$status, , $cookies] = request($port, 'POST', 'login', ['username' => TEST_USER, 'password' => TEST_PASSWORD], null, $andere);
+    check('andere Adresse meldet sich weiter an: 200', $status === 200 && sessionCookie($cookies) !== null);
+
+    for ($i = 0; $i < 9; $i++) {
+        request($port, 'POST', 'login', ['username' => TEST_USER, 'password' => "falsch$i"], null, $andere);
+    }
+    [$status] = request($port, 'POST', 'login', ['username' => TEST_USER, 'password' => TEST_PASSWORD], null, $andere);
+    check('Erfolg setzt den Zähler zurück: neun Fehlversuche danach, dann 200', $status === 200);
+} finally {
+    proc_terminate($server);
+}
+
+[$server, $port] = startServer(['API_KEY_1' => TEST_KEY, 'PATH' => getenv('PATH'), 'ADMIN_LOGIN_LIMIT_DIR' => limitDir()]);
 try {
     [$status, $json, $cookies] = request($port, 'POST', 'login', ['username' => '', 'password' => '']);
     check('ohne konfigurierte Zugangsdaten, leere Eingabe: 401', $status === 401);

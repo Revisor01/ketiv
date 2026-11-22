@@ -38,4 +38,5 @@ jobs:
           php tests/api/api_key_test.php
           php tests/api/church_events_test.php
           php tests/api/church_events_update_test.php
+          php tests/api/losungen_db_test.php
           php tests/api/tageslosung_test.php
