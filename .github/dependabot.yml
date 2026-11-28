@@ -19,3 +19,7 @@ updates:
     directories: ["/", "/frontend"]
     schedule: { interval: weekly, day: monday, time: "06:00", timezone: Europe/Berlin }
     commit-message: { prefix: chore }
+    ignore:
+      # php:8.6 bringt kein pecl mehr mit; die Redis-Erweiterung braucht dann einen anderen Weg.
+      - dependency-name: php
+        versions: [">= 8.6"]
